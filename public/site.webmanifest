@@ -1,0 +1,16 @@
+{
+  "name": "Tools Bisnis & Keuangan Indonesia",
+  "short_name": "TBKI",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

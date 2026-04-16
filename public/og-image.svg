@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Tools Bisnis & Keuangan Indonesia">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="55%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="70%" cy="25%" r="55%">
+      <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#60a5fa" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="920" cy="130" r="300" fill="url(#glow)"/>
+  <rect x="80" y="70" width="140" height="140" rx="36" fill="#2563eb" opacity="0.95"/>
+  <circle cx="150" cy="140" r="50" fill="none" stroke="#dbeafe" stroke-width="12"/>
+  <path d="M124 140h52M150 114v52" stroke="#ffffff" stroke-width="10" stroke-linecap="round"/>
+  <text x="255" y="130" fill="#93c5fd" font-family="Arial, sans-serif" font-size="28" font-weight="700">Tools Bisnis & Keuangan Indonesia</text>
+  <text x="255" y="185" fill="#ffffff" font-family="Arial, sans-serif" font-size="60" font-weight="700">Invoice, pinjaman, PPN,</text>
+  <text x="255" y="255" fill="#ffffff" font-family="Arial, sans-serif" font-size="60" font-weight="700">diskon, margin, dan bisnis</text>
+  <text x="255" y="335" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="28">Katalog tools online yang cepat, rapi, dan siap berkembang.</text>
+  <rect x="255" y="405" width="210" height="64" rx="32" fill="#93c5fd"/>
+  <text x="360" y="447" fill="#0f172a" font-family="Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">Mulai Pakai</text>
+</svg>
