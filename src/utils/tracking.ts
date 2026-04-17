@@ -78,12 +78,12 @@ export async function initGoogleTracking(router: Router) {
     return;
   }
 
+  initGtag(GA_MEASUREMENT_ID);
   const scriptLoaded = await injectGoogleTagScript(GA_MEASUREMENT_ID);
   if (!scriptLoaded) {
     console.warn('[GA4] Failed to load gtag.js from googletagmanager.com. Tracking hits will not be sent.');
     return;
   }
-  initGtag(GA_MEASUREMENT_ID);
 
   router.afterEach((to) => {
     // Delay 1 tick so document.title and URL are finalized after SPA navigation.
