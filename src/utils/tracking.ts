@@ -41,16 +41,18 @@ function initGtag(measurementId: string) {
     };
 
   window.gtag('js', new Date());
-  window.gtag('config', measurementId);
+  window.gtag('config', measurementId, { send_page_view: false });
 }
 
 function trackPageView(measurementId: string, path: string) {
   if (!window.gtag) return;
 
-  window.gtag('config', measurementId, {
+  window.gtag('event', 'page_view', {
+    send_to: measurementId,
     page_path: path,
     page_location: window.location.href,
     page_title: document.title,
+    debug_mode: IS_DEV || undefined,
   });
 }
 
@@ -80,7 +82,10 @@ export async function initGoogleTracking(router: Router) {
   initGtag(GA_MEASUREMENT_ID);
 
   router.afterEach((to) => {
-    trackPageView(GA_MEASUREMENT_ID, to.fullPath);
+    // Delay 1 tick so document.title and URL are finalized after SPA navigation.
+    setTimeout(() => {
+      trackPageView(GA_MEASUREMENT_ID, to.fullPath);
+    }, 0);
   });
 
   trackPageView(GA_MEASUREMENT_ID, router.currentRoute.value.fullPath);
