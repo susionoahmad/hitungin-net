@@ -41,15 +41,14 @@ function initGtag(measurementId: string) {
     };
 
   window.gtag('js', new Date());
-  window.gtag('config', measurementId, { send_page_view: false });
+  window.gtag('config', measurementId);
 }
 
-function trackPageView(measurementId: string) {
+function trackPageView(measurementId: string, path: string) {
   if (!window.gtag) return;
 
-  window.gtag('event', 'page_view', {
-    send_to: measurementId,
-    page_path: window.location.pathname,
+  window.gtag('config', measurementId, {
+    page_path: path,
     page_location: window.location.href,
     page_title: document.title,
   });
@@ -80,9 +79,9 @@ export async function initGoogleTracking(router: Router) {
   await injectGoogleTagScript(GA_MEASUREMENT_ID);
   initGtag(GA_MEASUREMENT_ID);
 
-  router.afterEach(() => {
-    trackPageView(GA_MEASUREMENT_ID);
+  router.afterEach((to) => {
+    trackPageView(GA_MEASUREMENT_ID, to.fullPath);
   });
 
-  trackPageView(GA_MEASUREMENT_ID);
+  trackPageView(GA_MEASUREMENT_ID, router.currentRoute.value.fullPath);
 }
