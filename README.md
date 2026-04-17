@@ -39,8 +39,11 @@ npm run build
 4. Output directory: `dist`
 5. Tambahkan environment variable di Vercel Project Settings:
    - `VITE_SITE_URL=https://domain-anda.com`
+   - `VITE_GA4_MEASUREMENT_ID=G-XXXXXXXXXX`
+   - `VITE_GSC_VERIFICATION_TOKEN=...` (kode dari meta tag verifikasi Google Search Console)
 6. Deploy.
 
 Catatan:
 - Project sudah memakai `vercel.json` rewrite ke `index.html` agar route SPA seperti `/en/loan-calculator` tidak 404 saat direct open/refresh.
 - `sitemap.xml` dan `robots.txt` digenerate saat build melalui `scripts/generate-seo.mjs`, sehingga URL di dalam sitemap akan mengikuti `VITE_SITE_URL`.
+- GA4 akan otomatis kirim page view setiap perpindahan route (SPA tracking).
