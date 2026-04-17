@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router';
 import jsPDF from 'jspdf';
 import { formatRupiah } from '@/utils/currency';
 import { detectLocaleFromPath } from '@/utils/locale';
-import { trackGaEvent } from '@/utils/tracking';
+import { trackConversionEvent } from '@/utils/tracking';
 
 type InvoiceItem = {
   name: string;
@@ -136,7 +136,7 @@ function exportPdf() {
   const fileName = `${form.invoiceNumber}-${ui.value.fileSuffix}.pdf`;
   pdf.save(fileName);
 
-  trackGaEvent('download_invoice_pdf', {
+  trackConversionEvent('download_invoice_pdf', {
     invoice_number: form.invoiceNumber,
     item_count: form.items.length,
     invoice_total: total.value,

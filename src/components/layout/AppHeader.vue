@@ -5,6 +5,7 @@ import { RouterLink, useRoute } from 'vue-router';
 import { useTheme } from '@/composables/useTheme';
 import { buildLocalePath, detectLocaleFromPath, localeDisplayName, switchLocalePath } from '@/utils/locale';
 import { t } from '@/utils/localText';
+import { trackClickEvent } from '@/utils/tracking';
 
 const { isDark, toggleTheme } = useTheme();
 const menuOpen = ref(false);
@@ -24,12 +25,26 @@ const navItems = computed(() => [
   { label: t('about', currentLocale.value), to: buildLocalePath('/about', currentLocale.value) },
   { label: t('privacy', currentLocale.value), to: buildLocalePath('/privacy-policy', currentLocale.value) },
 ]);
+
+function trackHeaderClick(label: string, target?: string) {
+  trackClickEvent({
+    click_text: label,
+    click_target: target,
+    click_location: 'header',
+    language: currentLocale.value,
+  });
+}
+
+function toggleThemeWithTracking() {
+  trackHeaderClick(isDark.value ? 'Light mode' : 'Dark mode');
+  toggleTheme();
+}
 </script>
 
 <template>
   <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/85 backdrop-blur dark:border-white/10 dark:bg-slate-950/85">
     <div class="section-shell flex items-center justify-between gap-4 py-4">
-      <RouterLink :to="buildLocalePath('/', currentLocale)" class="flex items-center gap-3">
+      <RouterLink :to="buildLocalePath('/', currentLocale)" class="flex items-center gap-3" @click="trackHeaderClick('Brand logo', buildLocalePath('/', currentLocale))">
         <div class="grid h-11 w-11 place-items-center rounded-2xl bg-brand-500/15 text-lg font-bold text-brand-700 dark:bg-brand-500/20 dark:text-brand-200">
           TB
         </div>
@@ -45,6 +60,7 @@ const navItems = computed(() => [
           :key="item.to"
           :to="item.to"
           class="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+          @click="trackHeaderClick(item.label, item.to)"
         >
           {{ item.label }}
         </RouterLink>
@@ -54,20 +70,21 @@ const navItems = computed(() => [
         <button
           type="button"
           class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10 md:hidden"
-          @click="menuOpen = !menuOpen"
+          @click="trackHeaderClick('Menu'); menuOpen = !menuOpen"
         >
           Menu
         </button>
         <button
           type="button"
           class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
-          @click="toggleTheme"
+          @click="toggleThemeWithTracking"
         >
           {{ isDark ? 'Light mode' : 'Dark mode' }}
         </button>
         <RouterLink
           :to="languageLink"
           class="rounded-full border border-brand-400/30 bg-brand-500/10 px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-500/20 dark:text-brand-200"
+          @click="trackHeaderClick(`Switch language to ${languageLabel}`, languageLink)"
         >
           {{ languageLabel }}
         </RouterLink>
@@ -81,11 +98,11 @@ const navItems = computed(() => [
           :key="item.to"
           :to="item.to"
           class="rounded-xl px-4 py-3 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-white"
-          @click="menuOpen = false"
+          @click="trackHeaderClick(item.label, item.to); menuOpen = false"
         >
           {{ item.label }}
         </RouterLink>
-        <RouterLink :to="languageLink" class="rounded-xl px-4 py-3 text-sm font-medium text-brand-700 hover:bg-slate-100 dark:text-brand-200 dark:hover:bg-white/5">
+        <RouterLink :to="languageLink" class="rounded-xl px-4 py-3 text-sm font-medium text-brand-700 hover:bg-slate-100 dark:text-brand-200 dark:hover:bg-white/5" @click="trackHeaderClick(`Switch language to ${languageLabel}`, languageLink)">
           {{ languageLabel }}
         </RouterLink>
       </nav>

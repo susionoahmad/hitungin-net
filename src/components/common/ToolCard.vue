@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 import { buildLocalePath, detectLocaleFromPath, type Locale } from '@/utils/locale';
-import { trackGaEvent } from '@/utils/tracking';
+import { trackConversionEvent } from '@/utils/tracking';
 
 const props = defineProps<{
   title: string;
@@ -16,7 +16,7 @@ const route = useRoute();
 const locale = computed(() => props.locale ?? detectLocaleFromPath(route.path));
 
 function trackOpenTool() {
-  trackGaEvent('select_tool', {
+  trackConversionEvent('select_tool', {
     tool_slug: props.slug,
     tool_title: props.title,
     tool_category: props.category,

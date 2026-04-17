@@ -10,6 +10,7 @@ import { applySeo } from '@/utils/seo';
 import { siteDescription, siteName, siteUrl } from '@/utils/site';
 import { buildLocalePath, detectLocaleFromPath } from '@/utils/locale';
 import { t } from '@/utils/localText';
+import { trackClickEvent } from '@/utils/tracking';
 
 const route = useRoute();
 const locale = computed(() => detectLocaleFromPath(route.path));
@@ -62,6 +63,15 @@ const quickLinks = computed(() =>
         { label: 'ROI Calculator', to: '/roi-calculator' },
       ],
 );
+
+function trackHomeClick(label: string, target: string) {
+  trackClickEvent({
+    click_text: label,
+    click_target: buildLocalePath(target, locale.value),
+    click_location: 'home',
+    language: locale.value,
+  });
+}
 </script>
 
 <template>
@@ -100,13 +110,13 @@ const quickLinks = computed(() =>
           }}
         </p>
         <div class="mt-5 flex flex-wrap gap-3">
-          <RouterLink :to="buildLocalePath('/kalkulator-bisnis-keuangan-online', locale)" class="rounded-full border border-brand-400/40 bg-brand-500/10 px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-500/20 dark:text-brand-200">
+          <RouterLink :to="buildLocalePath('/kalkulator-bisnis-keuangan-online', locale)" class="rounded-full border border-brand-400/40 bg-brand-500/10 px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-500/20 dark:text-brand-200" @click="trackHomeClick(t('landingSeo', locale), '/kalkulator-bisnis-keuangan-online')">
             {{ t('landingSeo', locale) }}
           </RouterLink>
-          <RouterLink :to="buildLocalePath('/tools', locale)" class="rounded-full bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-400">
+          <RouterLink :to="buildLocalePath('/tools', locale)" class="rounded-full bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-400" @click="trackHomeClick(locale === 'en' ? 'View all tools' : 'Lihat semua tools', '/tools')">
             {{ locale === 'en' ? 'View all tools' : 'Lihat semua tools' }}
           </RouterLink>
-          <RouterLink :to="buildLocalePath('/about', locale)" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-slate-100 dark:hover:bg-white/10">
+          <RouterLink :to="buildLocalePath('/about', locale)" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-slate-100 dark:hover:bg-white/10" @click="trackHomeClick(locale === 'en' ? 'About us' : 'Tentang kami', '/about')">
             {{ locale === 'en' ? 'About us' : 'Tentang kami' }}
           </RouterLink>
         </div>
@@ -227,6 +237,7 @@ const quickLinks = computed(() =>
             :key="link.to"
             :to="buildLocalePath(link.to, locale)"
             class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
+            @click="trackHomeClick(link.label, link.to)"
           >
             {{ link.label }}
           </RouterLink>

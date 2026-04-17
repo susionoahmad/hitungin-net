@@ -9,6 +9,7 @@ declare global {
 
 const GA_MEASUREMENT_ID = import.meta.env.VITE_GA4_MEASUREMENT_ID?.trim();
 const IS_DEV = import.meta.env.DEV;
+type GaEventParams = Record<string, string | number | boolean | undefined | null>;
 
 function isValidGa4MeasurementId(value: string | undefined): value is string {
   if (!value) return false;
@@ -39,11 +40,36 @@ function trackPageView(measurementId: string, path: string) {
   });
 }
 
-export function trackGaEvent(eventName: string, params: Record<string, unknown> = {}) {
+function cleanParams(params: GaEventParams) {
+  return Object.fromEntries(Object.entries(params).filter(([, value]) => value !== undefined && value !== null));
+}
+
+export function trackGaEvent(eventName: string, params: GaEventParams = {}) {
   if (!isValidGa4MeasurementId(GA_MEASUREMENT_ID) || !window.gtag) return;
 
   window.gtag('event', eventName, {
     send_to: GA_MEASUREMENT_ID,
+    debug_mode: IS_DEV || undefined,
+    ...cleanParams(params),
+  });
+}
+
+export function trackClickEvent(params: {
+  click_text: string;
+  click_target?: string;
+  click_location: string;
+  language?: string;
+}) {
+  trackGaEvent('site_click', {
+    event_category: 'engagement',
+    ...params,
+  });
+}
+
+export function trackConversionEvent(eventName: string, params: GaEventParams = {}) {
+  trackGaEvent(eventName, {
+    event_category: 'conversion',
+    conversion: true,
     ...params,
   });
 }
