@@ -9,16 +9,27 @@ declare global {
 
 const GA_MEASUREMENT_ID = import.meta.env.VITE_GA4_MEASUREMENT_ID?.trim();
 const GSC_VERIFICATION_TOKEN = import.meta.env.VITE_GSC_VERIFICATION_TOKEN?.trim();
+const IS_DEV = import.meta.env.DEV;
 
-function injectGoogleTagScript(measurementId: string) {
+function isValidGa4MeasurementId(value: string | undefined): value is string {
+  if (!value) return false;
+  if (value === 'G-XXXXXXXXXX') return false;
+  return /^G-[A-Z0-9]+$/i.test(value);
+}
+
+function injectGoogleTagScript(measurementId: string): Promise<void> {
   const scriptId = 'ga4-gtag-script';
-  if (document.getElementById(scriptId)) return;
+  if (document.getElementById(scriptId)) return Promise.resolve();
 
-  const script = document.createElement('script');
-  script.id = scriptId;
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
-  document.head.appendChild(script);
+  return new Promise((resolve) => {
+    const script = document.createElement('script');
+    script.id = scriptId;
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
+    script.onload = () => resolve();
+    script.onerror = () => resolve();
+    document.head.appendChild(script);
+  });
 }
 
 function initGtag(measurementId: string) {
@@ -33,10 +44,11 @@ function initGtag(measurementId: string) {
   window.gtag('config', measurementId, { send_page_view: false });
 }
 
-function trackPageView() {
-  if (!window.gtag || !GA_MEASUREMENT_ID) return;
+function trackPageView(measurementId: string) {
+  if (!window.gtag) return;
 
-  window.gtag('config', GA_MEASUREMENT_ID, {
+  window.gtag('event', 'page_view', {
+    send_to: measurementId,
     page_path: window.location.pathname,
     page_location: window.location.href,
     page_title: document.title,
@@ -58,19 +70,19 @@ export async function initGoogleTracking(router: Router) {
     setGoogleSiteVerificationToken(GSC_VERIFICATION_TOKEN);
   }
 
-  if (!GA_MEASUREMENT_ID) return;
+  if (!isValidGa4MeasurementId(GA_MEASUREMENT_ID)) {
+    if (IS_DEV) {
+      console.info('[GA4] Tracking disabled. Set VITE_GA4_MEASUREMENT_ID to a valid value (example: G-ABC123DEF4).');
+    }
+    return;
+  }
 
   await injectGoogleTagScript(GA_MEASUREMENT_ID);
   initGtag(GA_MEASUREMENT_ID);
 
-  // ⛔ jangan pakai currentRoute di sini
-
   router.afterEach(() => {
-    setTimeout(() => {
-      trackPageView();
-    }, 0);
+    trackPageView(GA_MEASUREMENT_ID);
   });
 
-  // ✅ initial pageview pakai window, bukan router
-  trackPageView();
+  trackPageView(GA_MEASUREMENT_ID);
 }
