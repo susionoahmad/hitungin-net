@@ -17,22 +17,7 @@ function isValidGa4MeasurementId(value: string | undefined): value is string {
   return /^G-[A-Z0-9]+$/i.test(value);
 }
 
-function injectGoogleTagScript(measurementId: string): Promise<boolean> {
-  const scriptId = 'ga4-gtag-script';
-  if (document.getElementById(scriptId)) return Promise.resolve(true);
-
-  return new Promise((resolve) => {
-    const script = document.createElement('script');
-    script.id = scriptId;
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
-    script.onload = () => resolve(true);
-    script.onerror = () => resolve(false);
-    document.head.appendChild(script);
-  });
-}
-
-function initGtag(measurementId: string) {
+function initGtag() {
   window.dataLayer = window.dataLayer || [];
   window.gtag =
     window.gtag ||
@@ -41,7 +26,6 @@ function initGtag(measurementId: string) {
     };
 
   window.gtag('js', new Date());
-  window.gtag('config', measurementId, { send_page_view: false });
 }
 
 function trackPageView(measurementId: string, path: string) {
@@ -78,12 +62,7 @@ export async function initGoogleTracking(router: Router) {
     return;
   }
 
-  initGtag(GA_MEASUREMENT_ID);
-  const scriptLoaded = await injectGoogleTagScript(GA_MEASUREMENT_ID);
-  if (!scriptLoaded) {
-    console.warn('[GA4] Failed to load gtag.js from googletagmanager.com. Tracking hits will not be sent.');
-    return;
-  }
+  initGtag();
 
   router.afterEach((to) => {
     // Delay 1 tick so document.title and URL are finalized after SPA navigation.
