@@ -59,19 +59,19 @@ applySeo({
       </div>
 
       <aside class="glass-panel p-6">
-        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">{{ locale === 'en' ? 'Contact Info' : 'Informasi Kontak' }}</p>
-        <div class="mt-4 space-y-4 text-sm text-slate-300">
+        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">{{ locale === 'en' ? 'Contact Info' : 'Informasi Kontak' }}</p>
+        <div class="mt-4 space-y-4 text-sm text-slate-700 dark:text-slate-300">
           <div>
-            <p class="text-slate-400">Email</p>
-            <p class="font-semibold text-white">hello@toolsbisniskeuangan.id</p>
+            <p class="text-slate-500 dark:text-slate-400">Email</p>
+            <p class="font-semibold text-slate-950 dark:text-white">hello@kalkulatorin.com</p>
           </div>
           <div>
-            <p class="text-slate-400">{{ locale === 'en' ? 'Response Time' : 'Respons' }}</p>
-            <p class="font-semibold text-white">{{ locale === 'en' ? 'Business days, Western Indonesia Time' : 'Hari kerja, waktu Indonesia Barat' }}</p>
+            <p class="text-slate-500 dark:text-slate-400">{{ locale === 'en' ? 'Response Time' : 'Respons' }}</p>
+            <p class="font-semibold text-slate-950 dark:text-white">{{ locale === 'en' ? 'Monday-Friday, 09.00-17.00 WIB' : 'Senin-Jumat, 09.00-17.00 WIB' }}</p>
           </div>
           <div>
-            <p class="text-slate-400">{{ locale === 'en' ? 'Website' : 'Situs' }}</p>
-            <p class="font-semibold text-white">{{ siteName }}</p>
+            <p class="text-slate-500 dark:text-slate-400">{{ locale === 'en' ? 'Website' : 'Situs' }}</p>
+            <p class="font-semibold text-slate-950 dark:text-white">Kalkulatorin - Tools bisnis & keuangan online Indonesia</p>
           </div>
         </div>
       </aside>

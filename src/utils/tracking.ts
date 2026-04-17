@@ -39,6 +39,15 @@ function trackPageView(measurementId: string, path: string) {
   });
 }
 
+export function trackGaEvent(eventName: string, params: Record<string, unknown> = {}) {
+  if (!isValidGa4MeasurementId(GA_MEASUREMENT_ID) || !window.gtag) return;
+
+  window.gtag('event', eventName, {
+    send_to: GA_MEASUREMENT_ID,
+    ...params,
+  });
+}
+
 export async function initGoogleTracking(router: Router) {
   if (!isValidGa4MeasurementId(GA_MEASUREMENT_ID)) {
     if (IS_DEV) {

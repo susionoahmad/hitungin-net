@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router';
 import jsPDF from 'jspdf';
 import { formatRupiah } from '@/utils/currency';
 import { detectLocaleFromPath } from '@/utils/locale';
+import { trackGaEvent } from '@/utils/tracking';
 
 type InvoiceItem = {
   name: string;
@@ -132,7 +133,17 @@ function exportPdf() {
   y += 7;
   pdf.setFontSize(12);
   pdf.text(`${ui.value.pdfTotal}: ${formatRupiah(total.value)}`, 14, y);
-  pdf.save(`${form.invoiceNumber}-${ui.value.fileSuffix}.pdf`);
+  const fileName = `${form.invoiceNumber}-${ui.value.fileSuffix}.pdf`;
+  pdf.save(fileName);
+
+  trackGaEvent('download_invoice_pdf', {
+    invoice_number: form.invoiceNumber,
+    item_count: form.items.length,
+    invoice_total: total.value,
+    tax_rate: form.taxRate,
+    language: locale.value,
+    file_name: fileName,
+  });
 }
 </script>
 
