@@ -8,7 +8,6 @@ declare global {
 }
 
 const GA_MEASUREMENT_ID = import.meta.env.VITE_GA4_MEASUREMENT_ID?.trim();
-const GSC_VERIFICATION_TOKEN = import.meta.env.VITE_GSC_VERIFICATION_TOKEN?.trim();
 const IS_DEV = import.meta.env.DEV;
 
 function isValidGa4MeasurementId(value: string | undefined): value is string {
@@ -40,21 +39,7 @@ function trackPageView(measurementId: string, path: string) {
   });
 }
 
-function setGoogleSiteVerificationToken(token: string) {
-  let tag = document.head.querySelector<HTMLMetaElement>('meta[name="google-site-verification"]');
-  if (!tag) {
-    tag = document.createElement('meta');
-    tag.name = 'google-site-verification';
-    document.head.appendChild(tag);
-  }
-  tag.content = token;
-}
-
 export async function initGoogleTracking(router: Router) {
-  if (GSC_VERIFICATION_TOKEN) {
-    setGoogleSiteVerificationToken(GSC_VERIFICATION_TOKEN);
-  }
-
   if (!isValidGa4MeasurementId(GA_MEASUREMENT_ID)) {
     if (IS_DEV) {
       console.info('[GA4] Tracking disabled. Set VITE_GA4_MEASUREMENT_ID to a valid value (example: G-ABC123DEF4).');
