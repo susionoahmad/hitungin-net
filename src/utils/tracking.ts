@@ -35,9 +35,10 @@ function initGtag(measurementId: string) {
 
 function trackPageView(path: string) {
   if (!window.gtag || !GA_MEASUREMENT_ID) return;
-  window.gtag('event', 'page_view', {
-    page_location: window.location.href,
+
+  window.gtag('config', GA_MEASUREMENT_ID, {
     page_path: path,
+    page_location: window.location.href,
     page_title: document.title,
   });
 }
