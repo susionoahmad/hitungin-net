@@ -33,11 +33,11 @@ function initGtag(measurementId: string) {
   window.gtag('config', measurementId, { send_page_view: false });
 }
 
-function trackPageView(path: string) {
+function trackPageView() {
   if (!window.gtag || !GA_MEASUREMENT_ID) return;
 
   window.gtag('config', GA_MEASUREMENT_ID, {
-    page_path: path,
+    page_path: window.location.pathname,
     page_location: window.location.href,
     page_title: document.title,
   });
@@ -53,19 +53,24 @@ function setGoogleSiteVerificationToken(token: string) {
   tag.content = token;
 }
 
-export function initGoogleTracking(router: Router) {
+export async function initGoogleTracking(router: Router) {
   if (GSC_VERIFICATION_TOKEN) {
     setGoogleSiteVerificationToken(GSC_VERIFICATION_TOKEN);
   }
 
   if (!GA_MEASUREMENT_ID) return;
 
-  injectGoogleTagScript(GA_MEASUREMENT_ID);
+  await injectGoogleTagScript(GA_MEASUREMENT_ID);
   initGtag(GA_MEASUREMENT_ID);
 
-  router.afterEach((to) => {
-    trackPageView(to.fullPath);
+  // ⛔ jangan pakai currentRoute di sini
+
+  router.afterEach(() => {
+    setTimeout(() => {
+      trackPageView();
+    }, 0);
   });
 
-  trackPageView(router.currentRoute.value.fullPath);
+  // ✅ initial pageview pakai window, bukan router
+  trackPageView();
 }
