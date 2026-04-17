@@ -30,11 +30,11 @@ const navItems = computed(() => [
   <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/85 backdrop-blur dark:border-white/10 dark:bg-slate-950/85">
     <div class="section-shell flex items-center justify-between gap-4 py-4">
       <RouterLink :to="buildLocalePath('/', currentLocale)" class="flex items-center gap-3">
-        <div class="grid h-11 w-11 place-items-center rounded-2xl bg-brand-500/20 text-lg font-bold text-brand-200">
+        <div class="grid h-11 w-11 place-items-center rounded-2xl bg-brand-500/15 text-lg font-bold text-brand-700 dark:bg-brand-500/20 dark:text-brand-200">
           TB
         </div>
         <div>
-          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-300">{{ brandEyebrow }}</p>
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-600 dark:text-brand-300">{{ brandEyebrow }}</p>
           <p class="text-base font-semibold text-slate-900 dark:text-white">{{ brandName }}</p>
         </div>
       </RouterLink>
@@ -67,7 +67,7 @@ const navItems = computed(() => [
         </button>
         <RouterLink
           :to="languageLink"
-          class="rounded-full border border-brand-400/30 bg-brand-500/10 px-4 py-2 text-sm font-semibold text-brand-200 hover:bg-brand-500/20"
+          class="rounded-full border border-brand-400/30 bg-brand-500/10 px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-500/20 dark:text-brand-200"
         >
           {{ languageLabel }}
         </RouterLink>

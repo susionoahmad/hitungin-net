@@ -46,3 +46,49 @@ a {
 .section-shell {
   @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
 }
+
+html:not(.dark) .bg-slate-900\/70,
+html:not(.dark) .bg-slate-900\/60,
+html:not(.dark) .bg-slate-900\/50,
+html:not(.dark) .bg-slate-950\/60 {
+  @apply border-slate-200 bg-white text-slate-900;
+}
+
+html:not(.dark) .border-white\/10,
+html:not(.dark) .border-white\/15 {
+  @apply border-slate-200;
+}
+
+html:not(.dark) input.text-white,
+html:not(.dark) input.text-slate-100,
+html:not(.dark) textarea.text-white,
+html:not(.dark) textarea.text-slate-100,
+html:not(.dark) select.text-white,
+html:not(.dark) select.text-slate-100 {
+  @apply text-slate-900;
+}
+
+html:not(.dark) .text-white {
+  @apply text-slate-950;
+}
+
+html:not(.dark) .text-slate-100,
+html:not(.dark) .text-slate-200,
+html:not(.dark) .text-slate-300 {
+  @apply text-slate-700;
+}
+
+html:not(.dark) .text-slate-400 {
+  @apply text-slate-500;
+}
+
+html:not(.dark) .text-brand-200,
+html:not(.dark) .text-brand-300 {
+  @apply text-brand-600;
+}
+
+html:not(.dark) .bg-brand-500.text-white,
+html:not(.dark) .bg-brand-500 .text-white,
+html:not(.dark) .hover\:bg-brand-400.text-white {
+  color: #fff;
+}

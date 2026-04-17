@@ -96,9 +96,9 @@ onBeforeUnmount(() => {
       <Breadcrumbs />
       <div class="grid gap-8 xl:grid-cols-[minmax(0,1fr)_300px]">
         <div>
-          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-brand-300">{{ presentedTool?.category ?? tool.category }}</p>
-          <h1 class="mt-3 text-4xl font-bold text-white sm:text-5xl">{{ presentedTool?.title ?? tool.title }}</h1>
-          <p class="mt-4 max-w-3xl text-lg leading-8 text-slate-300">{{ presentedTool?.intro ?? tool.intro }}</p>
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-brand-600 dark:text-brand-300">{{ presentedTool?.category ?? tool.category }}</p>
+          <h1 class="mt-3 text-4xl font-bold text-slate-950 dark:text-white sm:text-5xl">{{ presentedTool?.title ?? tool.title }}</h1>
+          <p class="mt-4 max-w-3xl text-lg leading-8 text-slate-700 dark:text-slate-300">{{ presentedTool?.intro ?? tool.intro }}</p>
 
           <div ref="toolHost" class="mt-8">
             <component :is="ToolComponent" />
@@ -136,9 +136,9 @@ onBeforeUnmount(() => {
           <div class="mt-12">
             <SectionHeading eyebrow="FAQ">{{ locale === 'en' ? 'Frequently asked questions' : 'Pertanyaan yang sering ditanyakan' }}</SectionHeading>
             <div class="space-y-4">
-              <details v-for="faq in presentedTool?.faqs ?? tool.faqs" :key="faq.question" class="rounded-2xl border border-white/10 bg-white/5 p-5">
-                <summary class="cursor-pointer text-base font-semibold text-white">{{ faq.question }}</summary>
-                <p class="mt-3 leading-7 text-slate-300">{{ faq.answer }}</p>
+              <details v-for="faq in presentedTool?.faqs ?? tool.faqs" :key="faq.question" class="rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-sm dark:border-white/10 dark:bg-white/5">
+                <summary class="cursor-pointer text-base font-semibold text-slate-950 dark:text-white">{{ faq.question }}</summary>
+                <p class="mt-3 leading-7 text-slate-700 dark:text-slate-300">{{ faq.answer }}</p>
               </details>
             </div>
           </div>
@@ -158,10 +158,10 @@ onBeforeUnmount(() => {
           </div>
 
           <div class="mt-12 rounded-3xl border border-brand-400/20 bg-brand-500/10 p-6">
-            <h2 class="text-2xl font-semibold text-white">
+            <h2 class="text-2xl font-semibold text-slate-950 dark:text-white">
               {{ locale === 'en' ? 'Explore the site structure' : 'Jelajahi struktur situs' }}
             </h2>
-            <p class="mt-3 text-sm leading-7 text-slate-300">
+            <p class="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">
               {{
                 locale === 'en'
                   ? 'If you want to see all tools at once, open the tools page or our SEO landing page. For questions, visit the contact page.'
@@ -169,10 +169,10 @@ onBeforeUnmount(() => {
               }}
             </p>
             <div class="mt-5 flex flex-wrap gap-3">
-              <RouterLink :to="buildLocalePath('/tools', locale)" class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 hover:bg-white/10">{{ locale === 'en' ? 'All tools' : 'Semua tools' }}</RouterLink>
-              <RouterLink :to="buildLocalePath('/kalkulator-bisnis-keuangan-online', locale)" class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 hover:bg-white/10">{{ t('landingSeo', locale) }}</RouterLink>
-              <RouterLink :to="buildLocalePath('/contact', locale)" class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 hover:bg-white/10">{{ locale === 'en' ? 'Contact' : 'Kontak' }}</RouterLink>
-              <RouterLink :to="buildLocalePath('/sitemap', locale)" class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 hover:bg-white/10">{{ locale === 'en' ? 'Sitemap' : 'Peta situs' }}</RouterLink>
+              <RouterLink :to="buildLocalePath('/tools', locale)" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10">{{ locale === 'en' ? 'All tools' : 'Semua tools' }}</RouterLink>
+              <RouterLink :to="buildLocalePath('/kalkulator-bisnis-keuangan-online', locale)" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10">{{ t('landingSeo', locale) }}</RouterLink>
+              <RouterLink :to="buildLocalePath('/contact', locale)" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10">{{ locale === 'en' ? 'Contact' : 'Kontak' }}</RouterLink>
+              <RouterLink :to="buildLocalePath('/sitemap', locale)" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10">{{ locale === 'en' ? 'Sitemap' : 'Peta situs' }}</RouterLink>
             </div>
           </div>
         </div>
@@ -180,11 +180,11 @@ onBeforeUnmount(() => {
         <div class="space-y-6">
           <AdSidebar />
           <div class="glass-panel p-5">
-            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">{{ locale === 'en' ? 'Quick Navigation' : 'Navigasi Cepat' }}</p>
+            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">{{ locale === 'en' ? 'Quick Navigation' : 'Navigasi Cepat' }}</p>
             <div class="mt-4 space-y-3 text-sm">
-              <RouterLink :to="buildLocalePath('/tools', locale)" class="block text-slate-300 hover:text-white">{{ locale === 'en' ? 'All tools' : 'Semua tools' }}</RouterLink>
-              <RouterLink :to="buildLocalePath('/about', locale)" class="block text-slate-300 hover:text-white">{{ locale === 'en' ? 'About' : 'Tentang' }}</RouterLink>
-              <RouterLink :to="buildLocalePath('/privacy-policy', locale)" class="block text-slate-300 hover:text-white">{{ locale === 'en' ? 'Privacy Policy' : 'Kebijakan Privasi' }}</RouterLink>
+              <RouterLink :to="buildLocalePath('/tools', locale)" class="block text-slate-700 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">{{ locale === 'en' ? 'All tools' : 'Semua tools' }}</RouterLink>
+              <RouterLink :to="buildLocalePath('/about', locale)" class="block text-slate-700 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">{{ locale === 'en' ? 'About' : 'Tentang' }}</RouterLink>
+              <RouterLink :to="buildLocalePath('/privacy-policy', locale)" class="block text-slate-700 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">{{ locale === 'en' ? 'Privacy Policy' : 'Kebijakan Privasi' }}</RouterLink>
             </div>
           </div>
         </div>
@@ -193,8 +193,8 @@ onBeforeUnmount(() => {
 
     <template v-else>
       <div class="glass-panel p-8 text-center">
-        <h1 class="text-3xl font-bold text-white">{{ locale === 'en' ? 'Tool not found' : 'Tool tidak ditemukan' }}</h1>
-        <p class="mt-4 text-slate-300">{{ locale === 'en' ? 'Please return to the tools list to choose an available page.' : 'Silakan kembali ke daftar tools untuk memilih halaman yang tersedia.' }}</p>
+        <h1 class="text-3xl font-bold text-slate-950 dark:text-white">{{ locale === 'en' ? 'Tool not found' : 'Tool tidak ditemukan' }}</h1>
+        <p class="mt-4 text-slate-700 dark:text-slate-300">{{ locale === 'en' ? 'Please return to the tools list to choose an available page.' : 'Silakan kembali ke daftar tools untuk memilih halaman yang tersedia.' }}</p>
         <RouterLink :to="buildLocalePath('/tools', locale)" class="mt-6 inline-flex rounded-full bg-brand-500 px-5 py-3 text-sm font-semibold text-white">
           {{ locale === 'en' ? 'View all tools' : 'Lihat semua tools' }}
         </RouterLink>

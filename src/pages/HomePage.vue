@@ -69,17 +69,17 @@ const quickLinks = computed(() =>
     <Breadcrumbs />
     <div class="grid gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
       <div>
-        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-brand-300">
+        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-brand-600 dark:text-brand-300">
           {{ locale === 'en' ? 'Business & Finance Tools Indonesia' : 'Tools Bisnis & Keuangan Indonesia' }}
         </p>
-        <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
+        <h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight text-slate-950 dark:text-white sm:text-5xl">
           {{
             locale === 'en'
               ? 'Clean online tools for invoice, loans, discounts, margin, and VAT.'
               : 'Tools online yang rapi untuk invoice, pinjaman, diskon, margin, dan PPN.'
           }}
         </h1>
-        <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
+        <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-700 dark:text-slate-300">
           {{
             locale === 'en'
               ? 'This platform helps business owners, freelancers, and everyday users calculate business needs quickly without complicated spreadsheets. Every tool is lightweight, easy to understand, and focused on useful daily results.'
@@ -89,10 +89,10 @@ const quickLinks = computed(() =>
       </div>
 
       <aside class="glass-panel p-6">
-        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
+        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">
           {{ locale === 'en' ? 'Why this site was built' : 'Kenapa situs ini dibuat' }}
         </p>
-        <p class="mt-3 text-sm leading-7 text-slate-300">
+        <p class="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">
           {{
             locale === 'en'
               ? 'Many small businesses need fast calculations without installing heavy apps. This site brings essential tools into one place, with clean SEO structure, clear legal pages, and ad-ready spacing for healthy monetization.'
@@ -100,13 +100,13 @@ const quickLinks = computed(() =>
           }}
         </p>
         <div class="mt-5 flex flex-wrap gap-3">
-          <RouterLink :to="buildLocalePath('/kalkulator-bisnis-keuangan-online', locale)" class="rounded-full border border-brand-400/40 bg-brand-500/10 px-4 py-2 text-sm font-semibold text-brand-200 hover:bg-brand-500/20">
+          <RouterLink :to="buildLocalePath('/kalkulator-bisnis-keuangan-online', locale)" class="rounded-full border border-brand-400/40 bg-brand-500/10 px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-500/20 dark:text-brand-200">
             {{ t('landingSeo', locale) }}
           </RouterLink>
           <RouterLink :to="buildLocalePath('/tools', locale)" class="rounded-full bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-400">
             {{ locale === 'en' ? 'View all tools' : 'Lihat semua tools' }}
           </RouterLink>
-          <RouterLink :to="buildLocalePath('/about', locale)" class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-100 hover:bg-white/10">
+          <RouterLink :to="buildLocalePath('/about', locale)" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-slate-100 dark:hover:bg-white/10">
             {{ locale === 'en' ? 'About us' : 'Tentang kami' }}
           </RouterLink>
         </div>
@@ -180,9 +180,9 @@ const quickLinks = computed(() =>
         </p>
       </template>
       <div class="mt-8 grid gap-4 md:grid-cols-3">
-        <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
-          <h3 class="text-lg font-semibold text-white">{{ locale === 'en' ? 'Fast to use' : 'Cepat dipakai' }}</h3>
-          <p class="mt-3 text-sm leading-7 text-slate-300">
+        <div class="rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-sm dark:border-white/10 dark:bg-white/5">
+          <h3 class="text-lg font-semibold text-slate-950 dark:text-white">{{ locale === 'en' ? 'Fast to use' : 'Cepat dipakai' }}</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">
             {{
               locale === 'en'
                 ? 'Each tool opens with a straightforward form, so users can get results quickly without learning a complex interface.'
@@ -190,9 +190,9 @@ const quickLinks = computed(() =>
             }}
           </p>
         </div>
-        <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
-          <h3 class="text-lg font-semibold text-white">{{ locale === 'en' ? 'Built to scale' : 'Siap berkembang' }}</h3>
-          <p class="mt-3 text-sm leading-7 text-slate-300">
+        <div class="rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-sm dark:border-white/10 dark:bg-white/5">
+          <h3 class="text-lg font-semibold text-slate-950 dark:text-white">{{ locale === 'en' ? 'Built to scale' : 'Siap berkembang' }}</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">
             {{
               locale === 'en'
                 ? 'A centralized configuration model makes adding new tools easier, more consistent, and lower risk.'
@@ -200,9 +200,9 @@ const quickLinks = computed(() =>
             }}
           </p>
         </div>
-        <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
-          <h3 class="text-lg font-semibold text-white">{{ locale === 'en' ? 'Structured for SEO' : 'Rapi untuk SEO' }}</h3>
-          <p class="mt-3 text-sm leading-7 text-slate-300">
+        <div class="rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-sm dark:border-white/10 dark:bg-white/5">
+          <h3 class="text-lg font-semibold text-slate-950 dark:text-white">{{ locale === 'en' ? 'Structured for SEO' : 'Rapi untuk SEO' }}</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">
             {{
               locale === 'en'
                 ? 'Heading structure, editorial content, FAQs, and internal links are organized so search engines can understand each page better.'
@@ -213,8 +213,8 @@ const quickLinks = computed(() =>
       </div>
 
       <div class="mt-8 rounded-3xl border border-brand-400/20 bg-brand-500/10 p-6">
-        <h3 class="text-xl font-semibold text-white">{{ locale === 'en' ? 'Quick path to core tools' : 'Jalur cepat ke tool utama' }}</h3>
-        <p class="mt-3 text-sm leading-7 text-slate-300">
+        <h3 class="text-xl font-semibold text-slate-950 dark:text-white">{{ locale === 'en' ? 'Quick path to core tools' : 'Jalur cepat ke tool utama' }}</h3>
+        <p class="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">
           {{
             locale === 'en'
               ? 'Start with invoice, loans, and VAT for common needs. If you need profit analysis, move to margin, profit, or ROI. For cash flow and target planning, use cash flow forecast, working capital, and savings goal.'
@@ -226,7 +226,7 @@ const quickLinks = computed(() =>
             v-for="link in quickLinks"
             :key="link.to"
             :to="buildLocalePath(link.to, locale)"
-            class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 hover:bg-white/10"
+            class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
           >
             {{ link.label }}
           </RouterLink>
