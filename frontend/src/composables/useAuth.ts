@@ -9,6 +9,7 @@ type AuthUser = {
 
 type AuthProfile = AuthUser & {
   plan: string
+  plan_expires_at?: string | null
   role: string
   created_at: string | null
 }
