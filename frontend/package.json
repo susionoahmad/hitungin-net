@@ -1,0 +1,29 @@
+{
+  "name": "tools-bisnis-keuangan-indonesia",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "node scripts/generate-seo.mjs && vue-tsc --noEmit && vite build",
+    "seo:audit": "node --experimental-strip-types scripts/export-seo-audit.mjs",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.104.0",
+    "jspdf": "^2.5.2",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.18",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vue-tsc": "^2.2.10"
+  }
+}

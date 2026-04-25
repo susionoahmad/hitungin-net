@@ -1,0 +1,18 @@
+node_modules
+dist
+.DS_Store
+coverage
+.vite
+*.log
+public/sitemap.xml
+public/robots.txt
+
+# Local env files
+.env
+.env.local
+.env.*.local
+
+# Editor settings
+.vscode/
+.idea/
+Thumbs.db
