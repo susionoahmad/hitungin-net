@@ -1812,6 +1812,201 @@ export const tools: ToolDefinition[] = [
       },
     },
   },
+  {
+    slug: 'kalkulator-zakat',
+    title: 'Kalkulator Zakat',
+    description: 'Hitung zakat mal, profesi, dan emas dengan nisab terbaru secara akurat.',
+    category: 'Pajak',
+    component: () => import('@/components/tools/ZakatCalculatorTool.vue'),
+    seoTitle: 'Kalkulator Zakat Online | Hitung Zakat Profesi & Emas',
+    seoDescription:
+      'Hitung zakat mal, profesi, dan emas secara akurat berdasarkan nisab terbaru untuk kewajiban finansial Anda.',
+    intro:
+      'Kalkulator zakat ini membantu Anda menghitung kewajiban zakat mal, profesi, maupun emas dengan praktis. Dilengkapi dengan acuan nisab terbaru agar perhitungan tetap akurat dan sesuai kaidah.',
+    content: [
+      {
+        heading: 'Mengapa zakat perlu dihitung dengan tepat?',
+        paragraphs: [
+          'Zakat adalah instrumen penting dalam menyucikan harta dan membantu sesama. Namun, menentukan apakah harta kita sudah mencapai nisab dan berapa nominal yang harus dikeluarkan sering kali membingungkan bagi sebagian orang. Tool ini dirancang untuk menyederhanakan proses tersebut.',
+          'Dengan memasukkan penghasilan atau berat emas Anda, sistem akan membandingkannya dengan nisab (batas minimum wajib zakat) yang berlaku. Jika sudah mencapai batasnya, zakat sebesar 2.5% akan dihitung otomatis sehingga Anda bisa menunaikan kewajiban dengan lebih tenang.',
+        ],
+      },
+      {
+        heading: 'Jenis zakat yang didukung',
+        paragraphs: [
+          'Saat ini, alat ini mendukung dua jenis zakat yang paling umum: Zakat Profesi (penghasilan bulanan) dan Zakat Emas. Untuk zakat profesi, nisab biasanya setara dengan 522 kg beras atau 85 gram emas per tahun (tergantung kebijakan yang diikuti), sedangkan zakat emas murni menggunakan batas 85 gram.',
+          'Ke depannya, sistem ini dapat diperluas untuk mencakup zakat perdagangan, zakat saham, maupun zakat tabungan lainnya agar pengelolaan keuangan spiritual Anda menjadi lebih terpusat.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Berapa persen tarif zakat profesi?',
+        answer: 'Tarif zakat profesi adalah 2.5% dari total penghasilan yang telah mencapai nisab.',
+      },
+      {
+        question: 'Kapan seseorang wajib membayar zakat emas?',
+        answer: 'Zakat emas wajib dibayar jika emas yang dimiliki telah mencapai nisab 85 gram dan telah dimiliki selama satu tahun (haul).',
+      },
+    ],
+    relatedSlugs: ['salary-take-home-calculator', 'savings-goal-calculator', 'kalkulator-ppn'],
+  },
+  {
+    slug: 'kalkulator-dana-darurat',
+    title: 'Kalkulator Dana Darurat',
+    description: 'Hitung kebutuhan dana darurat berdasarkan pengeluaran bulanan dan profil risiko.',
+    category: 'Personal Finance',
+    component: () => import('@/components/tools/EmergencyFundCalculatorTool.vue'),
+    seoTitle: 'Kalkulator Dana Darurat Online | Perencanaan Keuangan Sehat',
+    seoDescription:
+      'Hitung kebutuhan dana darurat Anda berdasarkan pengeluaran bulanan dan status kehidupan agar keuangan tetap aman.',
+    intro:
+      'Dana darurat adalah fondasi utama keuangan yang sehat. Kalkulator ini membantu Anda menentukan berapa besar "bantalan" finansial yang ideal agar Anda tetap tenang saat menghadapi situasi tak terduga.',
+    content: [
+      {
+        heading: 'Kenapa dana darurat itu wajib?',
+        paragraphs: [
+          'Situasi darurat seperti kehilangan pekerjaan, kerusakan kendaraan, atau biaya medis mendadak bisa merusak rencana keuangan jika tidak ada persiapan. Dana darurat berfungsi sebagai pelindung agar Anda tidak perlu berhutang saat menghadapi tekanan finansial tersebut.',
+          'Besaran dana darurat setiap orang berbeda-beda. Seorang yang masih lajang tentu memiliki kebutuhan cadangan yang berbeda dibandingkan dengan mereka yang sudah berkeluarga dan memiliki anak. Tool ini mempertimbangkan profil risiko tersebut untuk memberikan rekomendasi yang tepat.',
+        ],
+      },
+      {
+        heading: 'Berapa idealnya dana yang disimpan?',
+        paragraphs: [
+          'Secara umum, pakar keuangan menyarankan 3 hingga 12 bulan pengeluaran bulanan untuk disimpan sebagai dana darurat. Angka ini fleksibel tergantung pada stabilitas penghasilan dan jumlah tanggungan Anda.',
+          'Simpanlah dana ini di instrumen yang likuid dan aman, seperti tabungan biasa atau reksa dana pasar uang, agar mudah ditarik kapan saja saat dibutuhkan tanpa ada potongan nilai yang signifikan.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Di mana sebaiknya menyimpan dana darurat?',
+        answer: 'Disarankan menyimpannya di tempat yang likuid seperti tabungan bank, deposito, atau reksa dana pasar uang.',
+      },
+      {
+        question: 'Apakah dana darurat boleh dipakai untuk investasi?',
+        answer: 'Tidak disarankan. Dana darurat tujuannya untuk keamanan, bukan untuk mencari return tinggi yang berisiko.',
+      },
+    ],
+    relatedSlugs: ['savings-goal-calculator', 'salary-take-home-calculator', 'cash-flow-forecast'],
+  },
+  {
+    slug: 'kalkulator-inflasi',
+    title: 'Kalkulator Inflasi',
+    description: 'Hitung nilai uang di masa depan berdasarkan rata-rata tingkat inflasi tahunan.',
+    category: 'Keuangan',
+    component: () => import('@/components/tools/InflationCalculatorTool.vue'),
+    seoTitle: 'Kalkulator Inflasi Online | Hitung Daya Beli Uang',
+    seoDescription:
+      'Lihat bagaimana inflasi memengaruhi daya beli uang Anda di masa depan dengan kalkulator inflasi sederhana.',
+    intro:
+      'Pernah merasa harga barang semakin mahal dari tahun ke tahun? Itu adalah efek inflasi. Kalkulator ini membantu Anda melihat berapa nilai uang Anda di masa depan dan seberapa besar kenaikan biaya hidup yang harus diantisipasi.',
+    content: [
+      {
+        heading: 'Memahami cara kerja inflasi',
+        paragraphs: [
+          'Inflasi adalah kenaikan harga barang dan jasa secara umum dalam jangka waktu tertentu. Hal ini menyebabkan daya beli uang kita menurun. Uang 10 juta hari ini tidak akan bisa membeli barang yang sama banyaknya di 10 tahun yang akan datang.',
+          'Dengan memahami angka inflasi, Anda bisa merencanakan investasi dengan lebih baik. Anda perlu mencari instrumen investasi yang imbal hasilnya di atas tingkat inflasi agar kekayaan Anda benar-benar tumbuh secara riil.',
+        ],
+      },
+      {
+        heading: 'Kegunaan menghitung inflasi',
+        paragraphs: [
+          'Tool ini sangat berguna untuk perencanaan jangka panjang seperti dana pensiun atau pembelian aset besar. Anda bisa memperkirakan berapa biaya hidup yang harus Anda siapkan di masa tua dengan memperhitungkan kenaikan harga tahunan.',
+          'Data inflasi di Indonesia biasanya berada di kisaran 3-6% per tahun, namun angka ini bisa bervariasi tergantung kondisi ekonomi global dan domestik.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Berapa rata-rata inflasi di Indonesia?',
+        answer: 'Secara historis biasanya berkisar antara 3% hingga 6% per tahun.',
+      },
+      {
+        question: 'Bagaimana cara melawan inflasi?',
+        answer: 'Cara paling efektif adalah dengan berinvestasi pada instrumen yang memberikan return lebih tinggi dari tingkat inflasi.',
+      },
+    ],
+    relatedSlugs: ['compound-interest-calculator', 'savings-goal-calculator', 'roi-calculator'],
+  },
+  {
+    slug: 'kalkulator-dana-pendidikan',
+    title: 'Kalkulator Dana Pendidikan',
+    description: 'Rencanakan tabungan pendidikan anak dengan mempertimbangkan kenaikan biaya sekolah.',
+    category: 'Personal Finance',
+    component: () => import('@/components/tools/EducationFundCalculatorTool.vue'),
+    seoTitle: 'Kalkulator Dana Pendidikan | Perencanaan Tabungan Anak',
+    seoDescription:
+      'Hitung estimasi biaya sekolah di masa depan dan tentukan target tabungan bulanan untuk pendidikan anak Anda.',
+    intro:
+      'Biaya pendidikan merupakan salah satu pengeluaran terbesar dalam keluarga yang kenaikannya sering kali melampaui inflasi umum. Kalkulator ini membantu Anda menyiapkan dana tersebut sejak dini secara terukur.',
+    content: [
+      {
+        heading: 'Tantangan kenaikan biaya pendidikan',
+        paragraphs: [
+          'Di Indonesia, kenaikan biaya pendidikan per tahun (inflasi pendidikan) bisa mencapai 10% hingga 15%. Hal ini membuat tabungan biasa terkadang tidak cukup untuk menutupi biaya masuk sekolah atau kuliah di masa depan.',
+          'Mulai merencanakan sejak anak masih kecil memberikan keuntungan berupa waktu yang lebih panjang untuk berinvestasi (compounding effect), sehingga beban tabungan bulanan menjadi lebih ringan.',
+        ],
+      },
+      {
+        heading: 'Langkah menyiapkan dana pendidikan',
+        paragraphs: [
+          'Pertama, tentukan target sekolah dan cari tahu biaya masuknya saat ini. Kedua, masukkan jangka waktu sampai anak mulai sekolah. Ketiga, tentukan target return investasi yang realistis. Tool ini akan menghitung berapa yang harus Anda sisihkan setiap bulan.',
+          'Dengan angka yang konkret, Anda bisa memilih instrumen investasi yang tepat, seperti reksa dana atau emas, sesuai dengan jangka waktu dan profil risiko Anda.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Kapan waktu terbaik mulai menabung dana pendidikan?',
+        answer: 'Sesegera mungkin, idealnya sejak anak lahir agar jangka waktu investasi lebih panjang.',
+      },
+      {
+        question: 'Berapa persen kenaikan biaya sekolah per tahun?',
+        answer: 'Rata-rata di Indonesia berkisar antara 10% hingga 15% per tahun.',
+      },
+    ],
+    relatedSlugs: ['savings-goal-calculator', 'inflation-calculator', 'compound-interest-calculator'],
+  },
+  {
+    slug: 'kalkulator-pelunasan-hutang',
+    title: 'Kalkulator Pelunasan Hutang',
+    description: 'Strategi pelunasan hutang lebih cepat dengan metode Snowball atau Avalanche.',
+    category: 'Kredit',
+    component: () => import('@/components/tools/DebtPayoffCalculatorTool.vue'),
+    seoTitle: 'Kalkulator Pelunasan Hutang | Strategi Bebas Hutang',
+    seoDescription:
+      'Hitung waktu pelunasan hutang Anda dan lihat bagaimana cicilan tambahan dapat mempercepat proses menjadi bebas hutang.',
+    intro:
+      'Memiliki hutang bisa terasa membebani jika tidak dikelola dengan rencana yang jelas. Kalkulator ini membantu Anda melihat kapan hutang Anda akan lunas dan berapa total bunga yang harus dibayar berdasarkan cicilan saat ini.',
+    content: [
+      {
+        heading: 'Pentingnya rencana pelunasan yang disiplin',
+        paragraphs: [
+          'Hutang dengan bunga tinggi bisa terus membengkak jika kita hanya membayar cicilan minimum. Dengan melihat timeline pelunasan yang konkret, Anda akan termotivasi untuk mengalokasikan dana lebih guna mempercepat proses tersebut.',
+          'Tool ini menghitung sisa hutang terhadap bunga berjalan dan cicilan bulanan Anda. Anda bisa mencoba menambah nominal cicilan untuk melihat seberapa banyak waktu dan bunga yang bisa dihemat.',
+        ],
+      },
+      {
+        heading: 'Mengenal strategi pelunasan',
+        paragraphs: [
+          'Ada dua metode populer: Debt Avalanche (fokus pada hutang dengan bunga tertinggi dulu untuk menghemat biaya) dan Debt Snowball (fokus pada hutang terkecil dulu untuk membangun momentum psikologis).',
+          'Apapun metodenya, kunci utamanya adalah konsistensi dan berhenti menambah hutang baru selama proses pelunasan berlangsung.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Apa itu metode Debt Snowball?',
+        answer: 'Metode melunasi hutang dari saldo terkecil ke terbesar untuk mendapatkan rasa pencapaian lebih cepat.',
+      },
+      {
+        question: 'Mana yang lebih baik, Avalanche atau Snowball?',
+        answer: 'Avalanche secara matematis lebih hemat bunga, namun Snowball seringkali lebih efektif secara psikologis bagi banyak orang.',
+      },
+    ],
+    relatedSlugs: ['loan-calculator', 'flat-installment-calculator', 'cash-flow-forecast'],
+  },
 ];
 
 const LEGACY_EN_CATEGORY_MAP: Record<string, string> = {
@@ -2026,6 +2221,31 @@ const LEGACY_EN_PROFILE_MAP: Record<string, LegacyEnProfile> = {
     purpose: 'measure profit after shipping and fulfillment costs',
     metrics: 'post-shipping margin and real order profit',
     bestFor: 'e-commerce order profitability checks',
+  },
+  'kalkulator-zakat': {
+    purpose: 'calculate your zakat obligations for income and gold based on the latest nisab',
+    metrics: 'zakat payable and nisab status',
+    bestFor: 'religious financial planning and compliance',
+  },
+  'kalkulator-dana-darurat': {
+    purpose: 'determine the ideal emergency fund size based on your expenses and lifestyle',
+    metrics: 'target fund size and months of coverage',
+    bestFor: 'personal financial security and safety nets',
+  },
+  'kalkulator-inflasi': {
+    purpose: 'visualize how inflation impacts your money and purchasing power over time',
+    metrics: 'future value and cost of living increase',
+    bestFor: 'long-term planning and investment education',
+  },
+  'kalkulator-dana-pendidikan': {
+    purpose: 'plan for future education costs by factoring in education-specific inflation',
+    metrics: 'future tuition cost and required monthly savings',
+    bestFor: 'parents planning for their children\'s education',
+  },
+  'kalkulator-pelunasan-hutang': {
+    purpose: 'calculate your debt payoff timeline and see the total interest cost',
+    metrics: 'months to payoff and total interest paid',
+    bestFor: 'debt management and clearance strategies',
   },
 };
 
@@ -2269,6 +2489,36 @@ export const EN_SEO_BLUEPRINTS: Record<string, EnglishSeoBlueprint> = {
     focus: 'Average Order Value',
     audience: 'Ecommerce & Growth Teams',
     benefit: 'Track transaction quality and campaign impact',
+  },
+  'kalkulator-zakat': {
+    intent: 'transactional',
+    focus: 'Zakat',
+    audience: 'Muslim Professionals & Individuals',
+    benefit: 'Calculate zakat mal and profession zakat accurately',
+  },
+  'kalkulator-dana-darurat': {
+    intent: 'informational',
+    focus: 'Emergency Fund',
+    audience: 'Individuals & Families',
+    benefit: 'Build a solid financial safety net for unexpected events',
+  },
+  'kalkulator-inflasi': {
+    intent: 'informational',
+    focus: 'Inflation',
+    audience: 'Savers & Investors',
+    benefit: 'Understand how inflation erodes your wealth over time',
+  },
+  'kalkulator-dana-pendidikan': {
+    intent: 'commercial',
+    focus: 'Education Fund',
+    audience: 'Parents & Guardians',
+    benefit: 'Save enough for your children\'s future education costs',
+  },
+  'kalkulator-pelunasan-hutang': {
+    intent: 'commercial',
+    focus: 'Debt Payoff',
+    audience: 'Borrowers & Debtors',
+    benefit: 'Create a clear plan to become debt-free faster',
   },
 };
 
