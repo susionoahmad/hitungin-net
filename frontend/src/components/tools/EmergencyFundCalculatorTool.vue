@@ -28,10 +28,10 @@ const targetFund = computed(() => form.monthlyExpense * multiplier.value);
       </label>
       <label class="block">
         <span class="text-sm text-slate-300">Status Kehidupan</span>
-        <select v-model="form.status" class="mt-2 w-full rounded-xl border border-white/10 bg-slate-900/70 px-4 py-3 text-white outline-none appearance-none">
-          <option value="single">Single (Lajang)</option>
-          <option value="married">Menikah (Tanpa Anak)</option>
-          <option value="kids">Menikah (Dengan Anak)</option>
+        <select v-model="form.status" class="mt-2 w-full rounded-xl border border-white/10 bg-slate-900 px-4 py-3 text-white outline-none appearance-none">
+          <option value="single" class="bg-slate-900 text-white">Single (Lajang)</option>
+          <option value="married" class="bg-slate-900 text-white">Menikah (Tanpa Anak)</option>
+          <option value="kids" class="bg-slate-900 text-white">Menikah (Dengan Anak)</option>
         </select>
       </label>
     </div>

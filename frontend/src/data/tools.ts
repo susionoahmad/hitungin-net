@@ -2007,6 +2007,123 @@ export const tools: ToolDefinition[] = [
     ],
     relatedSlugs: ['loan-calculator', 'flat-installment-calculator', 'cash-flow-forecast'],
   },
+  {
+    slug: 'kalkulator-pph-21',
+    title: 'Kalkulator PPh 21',
+    description: 'Hitung pajak penghasilan karyawan (PPh 21) dengan tarif progresif UU HPP terbaru.',
+    category: 'Pajak',
+    component: () => import('@/components/tools/Pph21CalculatorTool.vue'),
+    seoTitle: 'Kalkulator PPh 21 Online | Hitung Pajak Gaji Karyawan',
+    seoDescription:
+      'Hitung estimasi pajak penghasilan (PPh 21) secara akurat menggunakan tarif progresif dan PTKP terbaru.',
+    intro:
+      'Pajak Penghasilan Pasal 21 (PPh 21) adalah pajak atas penghasilan berupa gaji, upah, honorarium, dan tunjangan lainnya. Tool ini membantu Anda menghitung estimasi pajak yang dipotong dari penghasilan bulanan Anda.',
+    content: [
+      {
+        heading: 'Memahami tarif progresif UU HPP',
+        paragraphs: [
+          'Sejak berlakunya UU Harmonisasi Peraturan Perpajakan (HPP), tarif pajak di Indonesia menjadi lebih adil bagi pekerja dengan penghasilan menengah ke bawah. Tarif ini bersifat progresif, artinya semakin tinggi penghasilan Anda, lapisan tarif yang dikenakan juga semakin tinggi.',
+          'Lapisan pertama dimulai dari 5% untuk penghasilan kena pajak hingga 60 juta rupiah per tahun. Dengan alat ini, Anda tidak perlu menghitung setiap lapisan secara manual, karena sistem akan membagi penghasilan Anda ke dalam lapisan-lapisan yang sesuai secara otomatis.',
+        ],
+      },
+      {
+        heading: 'Pentingnya PTKP (Penghasilan Tidak Kena Pajak)',
+        paragraphs: [
+          'PTKP adalah batas penghasilan yang tidak dikenakan pajak. Nilainya bergantung pada status marital dan jumlah tanggungan Anda. Misalnya, seorang yang lajang (TK/0) memiliki batas PTKP yang berbeda dengan yang sudah menikah dan memiliki 3 anak (K/3).',
+          'Mengisi status PTKP dengan benar sangat penting agar hasil perhitungan pajak Anda akurat. Selisih antara total penghasilan setahun dan PTKP inilah yang disebut sebagai Penghasilan Kena Pajak (PKP), yang kemudian akan dikenakan tarif progresif.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Berapa batas minimal gaji yang kena pajak?',
+        answer: 'Secara umum, jika penghasilan setahun di bawah PTKP (mulai 54 juta/tahun untuk lajang), maka Anda tidak dikenakan PPh 21.',
+      },
+      {
+        question: 'Bagaimana jika saya tidak punya NPWP?',
+        answer: 'Sesuai peraturan, wajib pajak yang tidak memiliki NPWP akan dikenakan tarif 20% lebih tinggi dari tarif normal.',
+      },
+    ],
+    relatedSlugs: ['salary-take-home-calculator', 'kalkulator-ppn', 'tax-inclusive-price-calculator'],
+  },
+  {
+    slug: 'kalkulator-thr',
+    title: 'Kalkulator THR',
+    description: 'Hitung nominal Tunjangan Hari Raya (THR) sesuai masa kerja dan peraturan terbaru.',
+    category: 'Personal Finance',
+    component: () => import('@/components/tools/ThrCalculatorTool.vue'),
+    seoTitle: 'Kalkulator THR Online | Hitung Tunjangan Hari Raya',
+    seoDescription:
+      'Hitung besaran THR yang berhak Anda terima secara proporsional berdasarkan gaji dan masa kerja.',
+    intro:
+      'Tunjangan Hari Raya (THR) adalah pendapatan non-upah yang wajib dibayarkan oleh pengusaha kepada pekerja menjelang hari raya keagamaan. Kalkulator ini membantu Anda melihat estimasi THR yang akan diterima.',
+    content: [
+      {
+        heading: 'Aturan pembayaran THR di Indonesia',
+        paragraphs: [
+          'Berdasarkan Permenaker No. 6 Tahun 2016, pekerja yang telah mempunyai masa kerja 1 bulan secara terus menerus berhak mendapatkan THR. Bagi yang sudah bekerja 12 bulan atau lebih, berhak mendapatkan 1 bulan gaji penuh.',
+          'Sedangkan bagi pekerja yang masa kerjanya kurang dari 12 bulan tetapi sudah lebih dari 1 bulan, THR diberikan secara proporsional (pro-rata). Rumusnya adalah masa kerja dibagi 12, lalu dikalikan dengan 1 bulan gaji.',
+        ],
+      },
+      {
+        heading: 'Komponen gaji dalam THR',
+        paragraphs: [
+          'Gaji 1 bulan yang dimaksud dalam perhitungan THR terdiri atas upah tanpa tunjangan (gaji pokok) atau gaji pokok ditambah tunjangan tetap. Tunjangan tidak tetap seperti uang makan atau transport yang didasarkan pada kehadiran biasanya tidak dihitung ke dalam komponen THR.',
+          'Mengetahui hak THR Anda sejak awal membantu perencanaan keuangan keluarga menjelang hari raya agar dana tersebut bisa dialokasikan dengan bijak untuk kebutuhan mudik, zakat, maupun tabungan.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Apakah pekerja kontrak berhak dapat THR?',
+        answer: 'Ya, selama masa kerja sudah mencapai minimal 1 bulan, baik status PKWT (kontrak) maupun PKWTT (tetap) berhak mendapatkan THR.',
+      },
+      {
+        question: 'Kapan THR paling lambat dibayarkan?',
+        answer: 'THR wajib dibayarkan oleh pengusaha paling lambat 7 hari sebelum hari raya keagamaan.',
+      },
+    ],
+    relatedSlugs: ['salary-take-home-calculator', 'kalkulator-zakat', 'savings-goal-calculator'],
+  },
+  {
+    slug: 'kalkulator-pesangon',
+    title: 'Kalkulator Pesangon',
+    description: 'Hitung estimasi uang pesangon, UPMK, dan total hak Anda sesuai PP 35/2021.',
+    category: 'Kredit',
+    component: () => import('@/components/tools/SeverancePayCalculatorTool.vue'),
+    seoTitle: 'Kalkulator Pesangon Online | Hitung Uang Pesangon PHK',
+    seoDescription:
+      'Hitung estimasi uang pesangon (UP), UPMK, dan total hak yang diterima saat PHK atau pensiun sesuai PP 35/2021.',
+    intro:
+      'Uang pesangon adalah kompensasi yang wajib dibayarkan perusahaan kepada karyawan saat terjadi pemutusan hubungan kerja (PHK). Kalkulator ini membantu Anda melihat estimasi hak yang akan diterima berdasarkan masa kerja dan alasan berhenti.',
+    content: [
+      {
+        heading: 'Komponen pesangon dalam PP 35/2021',
+        paragraphs: [
+          'Berdasarkan peraturan terbaru turunan UU Cipta Kerja, komponen utama yang diterima karyawan meliputi Uang Pesangon (UP) dan Uang Penghargaan Masa Kerja (UPMK). Besaran UP dan UPMK ini ditentukan oleh lamanya masa kerja Anda di perusahaan tersebut.',
+          'Selain masa kerja, alasan pemutusan hubungan kerja juga sangat memengaruhi besarnya faktor pengali pesangon. Misalnya, pesangon karena efisiensi perusahaan memiliki pengali yang berbeda dengan pesangon karena pelanggaran disiplin atau pengunduran diri sukarela.',
+        ],
+      },
+      {
+        heading: 'Hak lainnya bagi karyawan',
+        paragraphs: [
+          'Selain UP dan UPMK, karyawan juga berhak atas Uang Penggantian Hak (UPH) yang mencakup sisa cuti tahunan yang belum diambil, biaya ongkos pulang untuk pekerja dan keluarganya, serta hal-hal lain yang ditetapkan dalam perjanjian kerja.',
+          'Menggunakan kalkulator ini membantu Anda memiliki ekspektasi yang jelas dan dasar diskusi yang kuat dengan tim HR atau manajemen perusahaan saat proses transisi kerja berlangsung.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Apakah karyawan yang resign dapat pesangon?',
+        answer: 'Secara hukum (PP 35/2021), karyawan yang resign sukarela tidak berhak atas UP, namun tetap berhak atas UPMK (untuk masa kerja tertentu) dan UPH.',
+      },
+      {
+        question: 'Bagaimana cara hitung UPMK?',
+        answer: 'UPMK mulai diberikan jika masa kerja sudah mencapai minimal 3 tahun, dan jumlah bulannya akan terus bertambah seiring bertambahnya masa kerja.',
+      },
+    ],
+    relatedSlugs: ['kalkulator-pph-21', 'salary-take-home-calculator', 'kalkulator-thr'],
+  },
 ];
 
 const LEGACY_EN_CATEGORY_MAP: Record<string, string> = {
@@ -2029,6 +2146,14 @@ const LEGACY_EN_TITLE_MAP: Record<string, string> = {
   'kalkulator-margin': 'Margin Calculator',
   'kalkulator-ppn': 'VAT Calculator',
   'salary-take-home-calculator': 'Take-Home Pay Calculator',
+  'kalkulator-zakat': 'Zakat Calculator',
+  'kalkulator-dana-darurat': 'Emergency Fund Calculator',
+  'kalkulator-inflasi': 'Inflation Calculator',
+  'kalkulator-dana-pendidikan': 'Education Fund Calculator',
+  'kalkulator-pelunasan-hutang': 'Debt Payoff Calculator',
+  'kalkulator-pph-21': 'Income Tax (PPh 21) Calculator',
+  'kalkulator-thr': 'THR Allowance Calculator',
+  'kalkulator-pesangon': 'Severance Pay Calculator',
 };
 
 type LegacyEnProfile = {
@@ -2246,6 +2371,16 @@ const LEGACY_EN_PROFILE_MAP: Record<string, LegacyEnProfile> = {
     purpose: 'calculate your debt payoff timeline and see the total interest cost',
     metrics: 'months to payoff and total interest paid',
     bestFor: 'debt management and clearance strategies',
+  },
+  'kalkulator-pph-21': {
+    purpose: 'estimate employee income tax using the latest progressive rates and PTKP',
+    metrics: 'monthly tax, annual tax, and taxable income base',
+    bestFor: 'employees and payroll planning',
+  },
+  'kalkulator-thr': {
+    purpose: 'calculate religious holiday allowance based on tenure and salary',
+    metrics: 'THR amount and prorated calculation basis',
+    bestFor: 'employees and financial holiday planning',
   },
 };
 
@@ -2519,6 +2654,24 @@ export const EN_SEO_BLUEPRINTS: Record<string, EnglishSeoBlueprint> = {
     focus: 'Debt Payoff',
     audience: 'Borrowers & Debtors',
     benefit: 'Create a clear plan to become debt-free faster',
+  },
+  'kalkulator-pph-21': {
+    intent: 'transactional',
+    focus: 'Income Tax PPh 21',
+    audience: 'Employees & HR Teams',
+    benefit: 'Estimate monthly tax deductions accurately',
+  },
+  'kalkulator-thr': {
+    intent: 'transactional',
+    focus: 'THR Allowance',
+    audience: 'Indonesian Employees',
+    benefit: 'Know your holiday allowance rights based on tenure',
+  },
+  'kalkulator-pesangon': {
+    intent: 'commercial',
+    focus: 'Severance Pay',
+    audience: 'Employees & HR Professionals',
+    benefit: 'Estimate legal severance benefits quickly and accurately',
   },
 };
 
