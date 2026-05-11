@@ -80,6 +80,14 @@ const baseRoutes = [
   '/safety-stock-calculator',
   '/invoice-due-date-calculator',
   '/average-order-value-calculator',
+  '/kalkulator-zakat',
+  '/kalkulator-dana-darurat',
+  '/kalkulator-inflasi',
+  '/kalkulator-dana-pendidikan',
+  '/kalkulator-pelunasan-hutang',
+  '/kalkulator-pph-21',
+  '/kalkulator-thr',
+  '/kalkulator-pesangon',
 ];
 
 const locales = ['id', 'en'];
