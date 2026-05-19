@@ -187,9 +187,9 @@ const amortizationAreaPath = computed(() => {
       </div>
     </div>
 
-    <div class="mt-8 overflow-x-auto rounded-2xl border border-white/10">
+    <div class="mt-8 overflow-auto max-h-96 rounded-2xl border border-white/10">
       <table class="min-w-full divide-y divide-white/10 text-sm">
-        <thead class="bg-slate-900/80 text-slate-300">
+        <thead class="bg-slate-900/90 backdrop-blur-md text-slate-300 sticky top-0 z-10">
           <tr>
             <th class="px-4 py-3 text-left font-semibold">{{ ui.month }}</th>
             <th class="px-4 py-3 text-left font-semibold">{{ ui.installment }}</th>
@@ -199,7 +199,7 @@ const amortizationAreaPath = computed(() => {
           </tr>
         </thead>
         <tbody class="divide-y divide-white/10 bg-slate-950/60">
-          <tr v-for="row in schedule.slice(0, 12)" :key="row.month">
+          <tr v-for="row in schedule" :key="row.month">
             <td class="px-4 py-3 text-slate-200">{{ row.month }}</td>
             <td class="px-4 py-3 text-slate-200">{{ formatRupiah(row.payment) }}</td>
             <td class="px-4 py-3 text-slate-200">{{ formatRupiah(row.interest) }}</td>
