@@ -1,10 +1,26 @@
-export function formatRupiah(value: number): string {
+export function formatCurrency(value: number, currencyCode: string = 'IDR'): string {
   const normalized = Number.isFinite(value) ? value : 0;
-  return new Intl.NumberFormat('id-ID', {
+  const upperCode = (currencyCode || 'IDR').toUpperCase();
+
+  let locale = 'id-ID';
+  if (upperCode === 'USD') locale = 'en-US';
+  else if (upperCode === 'SGD') locale = 'en-SG';
+  else if (upperCode === 'EUR') locale = 'de-DE';
+  else if (upperCode === 'GBP') locale = 'en-GB';
+  else if (upperCode === 'JPY') locale = 'ja-JP';
+
+  const hasDecimals = upperCode !== 'IDR' && upperCode !== 'JPY';
+
+  return new Intl.NumberFormat(locale, {
     style: 'currency',
-    currency: 'IDR',
-    maximumFractionDigits: 0,
+    currency: upperCode,
+    minimumFractionDigits: hasDecimals ? 2 : 0,
+    maximumFractionDigits: hasDecimals ? 2 : 0,
   }).format(normalized);
+}
+
+export function formatRupiah(value: number): string {
+  return formatCurrency(value, 'IDR');
 }
 
 export function parseNumberInput(value: string): number {

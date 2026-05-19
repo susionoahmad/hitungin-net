@@ -19,6 +19,7 @@ export type InvoicePayload = {
   dueDate: string
   paymentTerms: string
   accentColor: string
+  currency: string
   items: InvoiceItem[]
   subtotal: number
   total: number
@@ -37,6 +38,7 @@ export type SavedInvoice = {
   dueDate: string
   paymentTerms: string
   accentColor: string
+  currency: string
   items: InvoiceItem[]
   subtotal: number
   total: number
@@ -56,6 +58,7 @@ type InvoiceRow = {
   due_date: string | null
   payment_terms: string | null
   accent_color: string | null
+  currency: string | null
   subtotal: number | null
   total: number | null
   logo_data_url: string | null
@@ -94,6 +97,7 @@ function mapInvoiceRow(row: InvoiceRow): SavedInvoice {
     dueDate: row.due_date ?? '',
     paymentTerms: row.payment_terms ?? '',
     accentColor: row.accent_color ?? '#2563eb',
+    currency: row.currency ?? 'IDR',
     items: normalizeItems(row.items),
     subtotal: row.subtotal ?? 0,
     total: row.total ?? 0,
@@ -142,6 +146,7 @@ export function useInvoiceHistory() {
       due_date: payload.dueDate || null,
       payment_terms: payload.paymentTerms,
       accent_color: payload.accentColor,
+      currency: payload.currency || 'IDR',
       subtotal: payload.subtotal,
       total: payload.total,
       logo_data_url: payload.logoDataUrl,

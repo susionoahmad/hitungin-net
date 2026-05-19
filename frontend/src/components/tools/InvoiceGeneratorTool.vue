@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { formatRupiah } from '@/utils/currency'
+import { formatCurrency, formatRupiah } from '@/utils/currency'
 import { detectLocaleFromPath } from '@/utils/locale'
 import { trackConversionEvent } from '@/utils/tracking'
 import { useAuth } from '@/composables/useAuth'
@@ -229,6 +229,7 @@ const form = reactive({
   dueDate: createDefaultDueDate(),
   paymentTerms: isEn.value ? 'Net 14 days' : 'Net 14 hari',
   accentColor: accentPalette[0],
+  currency: 'IDR',
   items: [
     { name: ui.value.defaultItemName, qty: 1, price: 150000 },
   ] as InvoiceItem[],
@@ -272,7 +273,7 @@ function getImageFormat(dataUrl: string) {
 }
 
 function formatPdfCurrency(value: number) {
-  return formatRupiah(Math.max(0, value))
+  return formatCurrency(Math.max(0, value), form.currency)
 }
 
 async function refreshUsage() {
@@ -311,6 +312,7 @@ function loadInvoiceIntoForm(invoice: SavedInvoice) {
   form.dueDate = invoice.dueDate
   form.paymentTerms = invoice.paymentTerms
   form.accentColor = invoice.accentColor
+  form.currency = invoice.currency || 'IDR'
   form.items = invoice.items.length > 0
     ? invoice.items.map((item) => ({ ...item }))
     : [{ name: ui.value.defaultItemName, qty: 1, price: 0 }]
@@ -330,6 +332,7 @@ function resetInvoice() {
   form.dueDate = createDefaultDueDate()
   form.paymentTerms = isEn.value ? 'Net 14 days' : 'Net 14 hari'
   form.accentColor = accentPalette[0]
+  form.currency = 'IDR'
   form.items = [{ name: ui.value.defaultItemName, qty: 1, price: 150000 }]
   logoDataUrl.value = null
   saveFeedback.value = ui.value.resetSuccess
@@ -629,6 +632,7 @@ async function saveCurrentInvoice() {
       dueDate: form.dueDate,
       paymentTerms: form.paymentTerms,
       accentColor: form.accentColor,
+      currency: form.currency,
       items: form.items.map((item) => ({ ...item })),
       subtotal: subtotal.value,
       total: total.value,
@@ -771,6 +775,18 @@ async function reExportInvoice(invoice: SavedInvoice) {
                 </div>
               </div>
             </label>
+
+            <label class="block mt-4">
+              <span class="text-sm font-medium text-slate-300">{{ isEn ? 'Invoice Currency' : 'Mata Uang Invoice' }}</span>
+              <select v-model="form.currency" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-brand-500 dark:border-white/10 dark:bg-slate-900/70 dark:text-white dark:focus:border-brand-400">
+                <option value="IDR">IDR (Rupiah - Rp)</option>
+                <option value="USD">USD (US Dollar - $)</option>
+                <option value="SGD">SGD (Singapore Dollar - S$)</option>
+                <option value="EUR">EUR (Euro - €)</option>
+                <option value="GBP">GBP (British Pound - £)</option>
+                <option value="JPY">JPY (Japanese Yen - ¥)</option>
+              </select>
+            </label>
           </div>
 
           <div class="flex flex-col">
@@ -821,11 +837,11 @@ async function reExportInvoice(invoice: SavedInvoice) {
         <div class="mt-5 space-y-3 text-sm">
           <div class="flex items-center justify-between gap-4">
             <span class="text-slate-400">{{ ui.subtotal }}</span>
-            <span class="font-semibold text-white">{{ formatRupiah(subtotal) }}</span>
+            <span class="font-semibold text-white">{{ formatCurrency(subtotal, form.currency) }}</span>
           </div>
           <div class="flex items-center justify-between gap-4">
             <span class="text-slate-400">{{ ui.tax }}</span>
-            <span class="font-semibold text-white">{{ formatRupiah(taxAmount) }}</span>
+            <span class="font-semibold text-white">{{ formatCurrency(taxAmount, form.currency) }}</span>
           </div>
           <div class="flex items-center justify-between gap-4">
             <span class="text-slate-400">{{ ui.paymentTerms }}</span>
@@ -837,7 +853,7 @@ async function reExportInvoice(invoice: SavedInvoice) {
           </div>
           <div class="flex items-center justify-between gap-4 border-t border-white/10 pt-3 text-base">
             <span class="font-semibold text-white">{{ ui.total }}</span>
-            <span class="font-bold text-brand-300">{{ formatRupiah(total) }}</span>
+            <span class="font-bold text-brand-300">{{ formatCurrency(total, form.currency) }}</span>
           </div>
         </div>
 
@@ -867,7 +883,7 @@ async function reExportInvoice(invoice: SavedInvoice) {
           <div class="min-w-0">
             <p class="truncate text-sm font-semibold text-white">{{ invoice.invoiceNumber }} - {{ invoice.clientName || 'Client' }}</p>
             <p class="mt-1 text-sm text-slate-300">{{ ui.savedAt }}: {{ new Date(invoice.createdAt).toLocaleString(isEn ? 'en-US' : 'id-ID') }}</p>
-            <p class="mt-1 text-sm text-brand-200">{{ formatRupiah(invoice.total) }}</p>
+            <p class="mt-1 text-sm text-brand-200">{{ formatCurrency(invoice.total, invoice.currency) }}</p>
           </div>
           <div class="flex flex-wrap gap-2">
             <button type="button" class="rounded-xl border border-white/10 px-3 py-2 text-sm font-semibold text-slate-100 hover:bg-white/5" @click="loadInvoiceIntoForm(invoice)">

@@ -57,6 +57,7 @@ class AuthAndInvoiceTest extends TestCase
             'due_date' => '2026-05-08',
             'payment_terms' => 'Net 14 hari',
             'accent_color' => '#2563eb',
+            'currency' => 'USD',
             'items' => [
                 [
                     'name' => 'Jasa Konsultasi',
@@ -73,13 +74,15 @@ class AuthAndInvoiceTest extends TestCase
             ->postJson('/api/invoices', $payload)
             ->assertCreated()
             ->assertJsonPath('data.invoice_number', 'INV-20260424-1001')
+            ->assertJsonPath('data.currency', 'USD')
             ->assertJsonPath('data.total', 333000);
 
         $this->withHeader('Authorization', "Bearer {$token}")
             ->getJson('/api/invoices')
             ->assertOk()
             ->assertJsonCount(1, 'data')
-            ->assertJsonPath('data.0.client_name', 'PT Maju Lancar');
+            ->assertJsonPath('data.0.client_name', 'PT Maju Lancar')
+            ->assertJsonPath('data.0.currency', 'USD');
     }
 
     public function test_login_is_rate_limited_after_five_attempts(): void

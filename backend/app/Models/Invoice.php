@@ -22,6 +22,7 @@ class Invoice extends Model
         'due_date',
         'payment_terms',
         'accent_color',
+        'currency',
         'items',
         'subtotal',
         'total',
