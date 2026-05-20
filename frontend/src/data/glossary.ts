@@ -227,5 +227,93 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'personal',
     categoryLabel: { id: 'Keuangan Pribadi', en: 'Personal Finance' },
     relatedToolSlug: 'kalkulator-dana-darurat'
+  },
+  {
+    slug: 'tenor-pinjaman',
+    term: { id: 'Tenor Pinjaman', en: 'Loan Tenor' },
+    definition: {
+      id: 'Jangka waktu pinjaman atau masa angsuran yang harus dipenuhi oleh debitur untuk melunasi seluruh kewajiban pokok beserta bunganya kepada kreditur.',
+      en: 'The repayment period or duration of a loan agreement, detailing the total amount of time a borrower has to repay the principal and interest to the lender.'
+    },
+    category: 'kredit',
+    categoryLabel: { id: 'Kredit & Pinjaman', en: 'Credit & Loans' },
+    relatedToolSlug: 'loan-calculator'
+  },
+  {
+    slug: 'suku-bunga-flat',
+    term: { id: 'Suku Bunga Flat', en: 'Flat Interest Rate' },
+    definition: {
+      id: 'Sistem perhitungan bunga kredit di mana besaran nilai bunga dihitung secara konstan berdasarkan pokok pinjaman awal selama seluruh jangka waktu kredit.',
+      en: 'An interest calculation method where the interest charge is computed as a fixed percentage of the initial principal throughout the entire term of the loan.'
+    },
+    category: 'kredit',
+    categoryLabel: { id: 'Kredit & Pinjaman', en: 'Credit & Loans' },
+    relatedToolSlug: 'flat-installment-calculator'
+  },
+  {
+    slug: 'suku-bunga-efektif',
+    term: { id: 'Suku Bunga Efektif', en: 'Effective Interest Rate' },
+    definition: {
+      id: 'Sistem bunga pinjaman di mana besaran bunga dihitung setiap bulan berdasarkan sisa pokok pinjaman yang belum dibayarkan. Beban bunga menurun seiring berkurangnya saldo pokok.',
+      en: 'An interest rate calculation where the monthly interest payment is computed based on the remaining outstanding principal balance of the loan, decreasing over time.'
+    },
+    category: 'kredit',
+    categoryLabel: { id: 'Kredit & Pinjaman', en: 'Credit & Loans' },
+    relatedToolSlug: 'loan-calculator'
+  },
+  {
+    slug: 'denda-keterlambatan',
+    term: { id: 'Denda Keterlambatan', en: 'Late Payment Fee / Interest' },
+    definition: {
+      id: 'Biaya tambahan atau denda bunga yang dikenakan kepada debitur sebagai konsekuensi atas keterlambatan pembayaran cicilan bulanan atau tagihan invoice yang melebihi tanggal jatuh tempo.',
+      en: 'An additional charge or interest penalty imposed on a borrower or client for failing to pay an installment or invoice on or before the specified due date.'
+    },
+    category: 'kredit',
+    categoryLabel: { id: 'Kredit & Pinjaman', en: 'Credit & Loans' },
+    relatedToolSlug: 'late-payment-interest-calculator'
+  },
+  {
+    slug: 'rasio-utang-pendapatan',
+    term: { id: 'Rasio Utang terhadap Pendapatan (DTI)', en: 'Debt to Income (DTI) Ratio' },
+    definition: {
+      id: 'Metrik keuangan yang membandingkan total kewajiban pembayaran utang bulanan dengan total pendapatan kotor bulanan seseorang, yang digunakan untuk mengukur batas kapasitas aman meminjam.',
+      en: 'A personal finance measure that compares an individual\'s total monthly debt payments to their gross monthly income, used to gauge their safe borrowing capacity and creditworthiness.'
+    },
+    category: 'kredit',
+    categoryLabel: { id: 'Kredit & Pinjaman', en: 'Credit & Loans' },
+    relatedToolSlug: 'loan-affordability-calculator'
+  },
+  {
+    slug: 'pokok-pinjaman',
+    term: { id: 'Pokok Pinjaman', en: 'Loan Principal' },
+    definition: {
+      id: 'Jumlah dana awal yang dipinjam atau saldo utang tersisa yang wajib dilunasi oleh debitur, di luar beban bunga, biaya admin, dan denda keterlambatan.',
+      en: 'The original sum of money borrowed under a loan agreement, or the remaining outstanding balance of the debt, excluding interest payments and additional fees.'
+    },
+    category: 'kredit',
+    categoryLabel: { id: 'Kredit & Pinjaman', en: 'Credit & Loans' },
+    relatedToolSlug: 'loan-calculator'
+  },
+  {
+    slug: 'debt-snowball',
+    term: { id: 'Debt Snowball (Metode Bola Salju)', en: 'Debt Snowball Method' },
+    definition: {
+      id: 'Strategi pelunasan utang dengan cara membayar utang dengan saldo terkecil terlebih dahulu sembari membayar cicilan minimum untuk utang lainnya. Memberikan kepuasan psikologis yang cepat.',
+      en: 'A debt reduction strategy where a borrower pays off loans with the smallest balances first, while paying minimum payments on larger ones, to build momentum through quick psychological wins.'
+    },
+    category: 'kredit',
+    categoryLabel: { id: 'Kredit & Pinjaman', en: 'Credit & Loans' },
+    relatedToolSlug: 'kalkulator-pelunasan-hutang'
+  },
+  {
+    slug: 'debt-avalanche',
+    term: { id: 'Debt Avalanche (Metode Longsoran)', en: 'Debt Avalanche Method' },
+    definition: {
+      id: 'Strategi pelunasan utang dengan memprioritaskan pembayaran utang yang memiliki suku bunga tertinggi terlebih dahulu demi meminimalkan total beban bunga finansial secara keseluruhan.',
+      en: 'A debt reduction strategy where a borrower prioritizes paying off loans with the highest interest rates first, which mathematically minimizes the overall cost of borrowing.'
+    },
+    category: 'kredit',
+    categoryLabel: { id: 'Kredit & Pinjaman', en: 'Credit & Loans' },
+    relatedToolSlug: 'kalkulator-pelunasan-hutang'
   }
 ];

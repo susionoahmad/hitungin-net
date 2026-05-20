@@ -687,10 +687,10 @@ async function reExportInvoice(invoice: SavedInvoice) {
         <button v-if="!user" type="button" class="rounded-xl bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-400" @click="openAuthModal('login')">
           {{ ui.login }}
         </button>
-        <button v-if="!user" type="button" class="rounded-xl border border-white/10 px-4 py-2 text-sm font-semibold text-slate-100 hover:bg-white/5" @click="openAuthModal('register')">
+        <button v-if="!user" type="button" class="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-white/10 dark:text-slate-100 dark:hover:bg-white/5" @click="openAuthModal('register')">
           {{ ui.register }}
         </button>
-        <button v-else type="button" class="rounded-xl border border-white/10 px-4 py-2 text-sm font-semibold text-slate-100 hover:bg-white/5 disabled:opacity-50" :disabled="isSigningOut" @click="handleSignOut">
+        <button v-else type="button" class="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-white/10 dark:text-slate-100 dark:hover:bg-white/5 disabled:opacity-50" :disabled="isSigningOut" @click="handleSignOut">
           {{ isSigningOut ? ui.processing : ui.logout }}
         </button>
       </div>
@@ -749,7 +749,7 @@ async function reExportInvoice(invoice: SavedInvoice) {
                 v-for="term in paymentTermOptions"
                 :key="term.days"
                 type="button"
-                class="rounded-lg bg-white/5 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 hover:bg-brand-500/20 hover:text-brand-300"
+                class="rounded-lg bg-slate-100 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500 hover:bg-brand-500/20 hover:text-brand-700 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-brand-500/20 dark:hover:text-brand-300"
                 @click="applyPaymentTerm(term.days)"
               >
                 {{ isEn ? (term.labelEn || term.label) : term.label }}
@@ -761,23 +761,23 @@ async function reExportInvoice(invoice: SavedInvoice) {
         <div class="mt-4 grid gap-6 md:grid-cols-[1fr_auto]">
           <div class="space-y-4">
             <label class="block">
-              <span class="text-sm font-medium text-slate-300">{{ ui.logoTitle }}</span>
+              <span class="text-sm font-medium text-slate-600 dark:text-slate-300">{{ ui.logoTitle }}</span>
               <div class="mt-2 flex items-center gap-4">
-                <div v-if="logoDataUrl" class="relative group h-20 w-20 overflow-hidden rounded-xl border border-white/10 bg-slate-900/70 p-2">
+                <div v-if="logoDataUrl" class="relative group h-20 w-20 overflow-hidden rounded-xl border border-slate-200 bg-slate-50 dark:border-white/10 dark:bg-slate-900/70 p-2">
                   <img :src="logoDataUrl" class="h-full w-full object-contain" alt="Logo Preview" />
                   <button type="button" class="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity group-hover:opacity-100" @click="removeLogo">
                     <span class="text-[10px] font-bold text-white uppercase">{{ ui.removeLogo }}</span>
                   </button>
                 </div>
                 <div class="flex-1">
-                  <input type="file" accept="image/png,image/jpeg" class="block w-full rounded-xl border border-dashed border-white/20 bg-slate-900/70 px-4 py-3 text-sm text-slate-300 file:mr-4 file:rounded-lg file:border-0 file:bg-brand-500 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-brand-400 cursor-pointer" @change="handleLogoChange" />
-                  <span class="mt-2 block text-xs text-slate-400">{{ isPro() ? ui.logoHelpPro : ui.logoHelpFree }}</span>
+                  <input type="file" accept="image/png,image/jpeg" class="block w-full rounded-xl border border-dashed border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600 dark:border-white/20 dark:bg-slate-900/70 dark:text-slate-300 file:mr-4 file:rounded-lg file:border-0 file:bg-brand-500 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-brand-400 cursor-pointer" @change="handleLogoChange" />
+                  <span class="mt-2 block text-xs text-slate-500 dark:text-slate-400">{{ isPro() ? ui.logoHelpPro : ui.logoHelpFree }}</span>
                 </div>
               </div>
             </label>
 
             <label class="block mt-4">
-              <span class="text-sm font-medium text-slate-300">{{ isEn ? 'Invoice Currency' : 'Mata Uang Invoice' }}</span>
+              <span class="text-sm font-medium text-slate-600 dark:text-slate-300">{{ isEn ? 'Invoice Currency' : 'Mata Uang Invoice' }}</span>
               <select v-model="form.currency" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-brand-500 dark:border-white/10 dark:bg-slate-900/70 dark:text-white dark:focus:border-brand-400">
                 <option value="IDR">IDR (Rupiah - Rp)</option>
                 <option value="USD">USD (US Dollar - $)</option>
@@ -790,14 +790,14 @@ async function reExportInvoice(invoice: SavedInvoice) {
           </div>
 
           <div class="flex flex-col">
-            <span class="text-sm font-medium text-slate-300">{{ ui.accentColor }}</span>
+            <span class="text-sm font-medium text-slate-600 dark:text-slate-300">{{ ui.accentColor }}</span>
             <div class="mt-2 grid grid-cols-3 gap-2">
               <button
                 v-for="color in accentPalette"
                 :key="color"
                 type="button"
                 class="h-10 w-10 rounded-lg border-2 transition-all hover:scale-110"
-                :class="form.accentColor === color ? 'border-white ring-2 ring-white/20' : 'border-white/10'"
+                :class="form.accentColor === color ? 'border-slate-800 dark:border-white ring-2 ring-slate-800/20 dark:ring-white/20' : 'border-slate-200 dark:border-white/10'"
                 :style="{ backgroundColor: color }"
                 @click="form.accentColor = color"
               />
@@ -806,19 +806,19 @@ async function reExportInvoice(invoice: SavedInvoice) {
         </div>
 
         <div class="mt-4 flex flex-wrap gap-3">
-          <button type="button" class="rounded-xl bg-brand-500 px-4 py-3 text-sm font-semibold text-white hover:bg-brand-400" @click="addItem">
+          <button type="button" class="rounded-xl bg-brand-500 px-4 py-3 text-sm font-semibold text-white hover:bg-brand-400">
             {{ ui.addItem }}
           </button>
-          <button type="button" class="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-slate-100 hover:bg-white/10 disabled:opacity-50" :disabled="isGenerating" @click="renderPdf()">
+          <button type="button" class="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-slate-100 dark:hover:bg-white/10 disabled:opacity-50" :disabled="isGenerating" @click="renderPdf()">
             <span v-if="isGenerating" class="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white"></span>
             {{ isGenerating ? ui.processing : ui.exportPdf }}
           </button>
-          <button type="button" class="rounded-xl border border-brand-500/30 bg-brand-500/10 px-4 py-3 text-sm font-semibold text-brand-100 hover:bg-brand-500/20 disabled:opacity-50" :disabled="isSaving" @click="saveCurrentInvoice">
+          <button type="button" class="rounded-xl border border-brand-500/30 bg-brand-500/10 px-4 py-3 text-sm font-semibold text-brand-700 hover:bg-brand-500/20 dark:text-brand-100 disabled:opacity-50" :disabled="isSaving" @click="saveCurrentInvoice">
             {{ isSaving ? ui.saving : (currentInvoiceId ? ui.saveAndUpdate : ui.saveInvoice) }}
           </button>
         </div>
 
-        <p v-if="saveFeedback" class="mt-3 text-sm text-brand-200">{{ saveFeedback }}</p>
+        <p v-if="saveFeedback" class="mt-3 text-sm text-brand-600 dark:text-brand-200">{{ saveFeedback }}</p>
 
         <div class="mt-6 space-y-4">
           <div v-for="(item, index) in form.items" :key="index" class="grid gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-slate-900/60 md:grid-cols-2 xl:grid-cols-[minmax(0,1.4fr)_110px_minmax(0,0.7fr)_auto]">
@@ -832,70 +832,70 @@ async function reExportInvoice(invoice: SavedInvoice) {
         </div>
       </div>
 
-      <aside class="rounded-2xl border border-white/10 bg-slate-950/60 p-5">
-        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-400">{{ ui.summary }}</p>
+      <aside class="glass-panel p-5">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">{{ ui.summary }}</p>
         <div class="mt-5 space-y-3 text-sm">
           <div class="flex items-center justify-between gap-4">
-            <span class="text-slate-400">{{ ui.subtotal }}</span>
-            <span class="font-semibold text-white">{{ formatCurrency(subtotal, form.currency) }}</span>
+            <span class="text-slate-500 dark:text-slate-400">{{ ui.subtotal }}</span>
+            <span class="font-semibold text-slate-900 dark:text-white">{{ formatCurrency(subtotal, form.currency) }}</span>
           </div>
           <div class="flex items-center justify-between gap-4">
-            <span class="text-slate-400">{{ ui.tax }}</span>
-            <span class="font-semibold text-white">{{ formatCurrency(taxAmount, form.currency) }}</span>
+            <span class="text-slate-500 dark:text-slate-400">{{ ui.tax }}</span>
+            <span class="font-semibold text-slate-900 dark:text-white">{{ formatCurrency(taxAmount, form.currency) }}</span>
           </div>
           <div class="flex items-center justify-between gap-4">
-            <span class="text-slate-400">{{ ui.paymentTerms }}</span>
-            <span class="font-semibold text-white">{{ form.paymentTerms || '-' }}</span>
+            <span class="text-slate-500 dark:text-slate-400">{{ ui.paymentTerms }}</span>
+            <span class="font-semibold text-slate-900 dark:text-white">{{ form.paymentTerms || '-' }}</span>
           </div>
           <div class="flex items-center justify-between gap-4">
-            <span class="text-slate-400">{{ ui.dueDate }}</span>
-            <span class="font-semibold text-white">{{ form.dueDate || '-' }}</span>
+            <span class="text-slate-500 dark:text-slate-400">{{ ui.dueDate }}</span>
+            <span class="font-semibold text-slate-900 dark:text-white">{{ form.dueDate || '-' }}</span>
           </div>
-          <div class="flex items-center justify-between gap-4 border-t border-white/10 pt-3 text-base">
-            <span class="font-semibold text-white">{{ ui.total }}</span>
-            <span class="font-bold text-brand-300">{{ formatCurrency(total, form.currency) }}</span>
+          <div class="flex items-center justify-between gap-4 border-t border-slate-200 dark:border-white/10 pt-3 text-base">
+            <span class="font-semibold text-slate-900 dark:text-white">{{ ui.total }}</span>
+            <span class="font-bold text-brand-600 dark:text-brand-300">{{ formatCurrency(total, form.currency) }}</span>
           </div>
         </div>
 
-        <div class="mt-6 rounded-2xl bg-brand-500/10 p-4 text-sm leading-7 text-brand-100">
+        <div class="mt-6 rounded-2xl bg-brand-500/10 p-4 text-sm leading-7 text-brand-700 dark:text-brand-100">
           {{ ui.saveHint }}
         </div>
       </aside>
     </div>
 
-    <section class="mt-6 rounded-2xl border border-white/10 bg-slate-950/60 p-5">
+    <section class="mt-6 glass-panel p-5">
       <div class="flex items-center justify-between gap-4">
         <div>
-          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-400">{{ ui.historyTitle }}</p>
-          <p class="mt-2 text-sm text-slate-300">{{ ui.loadHistory }}</p>
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">{{ ui.historyTitle }}</p>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">{{ ui.loadHistory }}</p>
         </div>
-        <button v-if="!user" type="button" class="rounded-xl border border-white/10 px-4 py-2 text-sm font-semibold text-slate-100 hover:bg-white/5" @click="openAuthModal('login')">
+        <button v-if="!user" type="button" class="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-white/10 dark:text-slate-100 dark:hover:bg-white/5" @click="openAuthModal('login')">
           {{ ui.login }}
         </button>
       </div>
 
-      <p v-if="historyError" class="mt-4 text-sm text-red-300">{{ ui.historyError }} {{ historyError }}</p>
-      <p v-else-if="!user && !isHistoryLoading" class="mt-4 text-sm text-slate-300">{{ ui.historyEmpty }}</p>
-      <p v-else-if="isHistoryLoading" class="mt-4 text-sm text-slate-300">{{ ui.loadingHistory }}</p>
+      <p v-if="historyError" class="mt-4 text-sm text-red-600 dark:text-red-300">{{ ui.historyError }} {{ historyError }}</p>
+      <p v-else-if="!user && !isHistoryLoading" class="mt-4 text-sm text-slate-600 dark:text-slate-300">{{ ui.historyEmpty }}</p>
+      <p v-else-if="isHistoryLoading" class="mt-4 text-sm text-slate-600 dark:text-slate-300">{{ ui.loadingHistory }}</p>
 
       <div v-else-if="invoices.length" class="mt-5 grid gap-3">
-        <div v-for="invoice in invoices" :key="invoice.id" class="grid gap-3 rounded-xl border border-white/10 bg-white/5 p-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
+        <div v-for="invoice in invoices" :key="invoice.id" class="grid gap-3 rounded-xl border border-slate-200 bg-white/50 p-4 dark:border-white/10 dark:bg-white/5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
           <div class="min-w-0">
-            <p class="truncate text-sm font-semibold text-white">{{ invoice.invoiceNumber }} - {{ invoice.clientName || 'Client' }}</p>
-            <p class="mt-1 text-sm text-slate-300">{{ ui.savedAt }}: {{ new Date(invoice.createdAt).toLocaleString(isEn ? 'en-US' : 'id-ID') }}</p>
-            <p class="mt-1 text-sm text-brand-200">{{ formatCurrency(invoice.total, invoice.currency) }}</p>
+            <p class="truncate text-sm font-semibold text-slate-900 dark:text-white">{{ invoice.invoiceNumber }} - {{ invoice.clientName || 'Client' }}</p>
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-300">{{ ui.savedAt }}: {{ new Date(invoice.createdAt).toLocaleString(isEn ? 'en-US' : 'id-ID') }}</p>
+            <p class="mt-1 text-sm text-brand-600 dark:text-brand-200">{{ formatCurrency(invoice.total, invoice.currency) }}</p>
           </div>
           <div class="flex flex-wrap gap-2">
-            <button type="button" class="rounded-xl border border-white/10 px-3 py-2 text-sm font-semibold text-slate-100 hover:bg-white/5" @click="loadInvoiceIntoForm(invoice)">
+            <button type="button" class="rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-white/10 dark:text-slate-100 dark:hover:bg-white/5" @click="loadInvoiceIntoForm(invoice)">
               {{ ui.edit }}
             </button>
-            <button type="button" class="rounded-xl border border-brand-500/30 bg-brand-500/10 px-3 py-2 text-sm font-semibold text-brand-100 hover:bg-brand-500/20" @click="reExportInvoice(invoice)">
+            <button type="button" class="rounded-xl border border-brand-500/30 bg-brand-500/10 px-3 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-500/20 dark:text-brand-100" @click="reExportInvoice(invoice)">
               {{ ui.reExport }}
             </button>
           </div>
         </div>
       </div>
-      <p v-else-if="user" class="mt-4 text-sm text-slate-300">{{ ui.historyEmpty }}</p>
+      <p v-else-if="user" class="mt-4 text-sm text-slate-600 dark:text-slate-300">{{ ui.historyEmpty }}</p>
     </section>
 
     <UpgradeModal v-if="showUpgradeModal" @close="showUpgradeModal = false" />
