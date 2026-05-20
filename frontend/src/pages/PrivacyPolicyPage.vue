@@ -23,6 +23,21 @@ applySeo({
     { hreflang: 'x-default', href: `${siteUrl}/privacy-policy` },
   ],
 });
+
+const navItems = computed(() => {
+  const isEn = locale.value === 'en';
+  return [
+    { id: 'scope', label: isEn ? '1. Scope' : '1. Ruang Lingkup' },
+    { id: 'info-collected', label: isEn ? '2. Information We May Collect' : '2. Informasi yang Dapat Dikumpulkan' },
+    { id: 'adsense', label: isEn ? '3. Google AdSense & Cookies' : '3. Google AdSense & Cookie Iklan' },
+    { id: 'cookies', label: isEn ? '4. Cookies & Local Storage' : '4. Cookies & Penyimpanan Lokal' },
+    { id: 'usage', label: isEn ? '5. How We Use Information' : '5. Penggunaan Informasi' },
+    { id: 'third-party', label: isEn ? '6. Third-Party Providers' : '6. Penyedia Layanan Pihak Ketiga' },
+    { id: 'security', label: isEn ? '7. Data Security' : '7. Keamanan Data' },
+    { id: 'children', label: isEn ? "8. Children's Privacy" : '8. Privasi Anak-Anak' },
+    { id: 'changes', label: isEn ? '9. Changes to This Policy' : '9. Perubahan Kebijakan' },
+  ];
+});
 </script>
 
 <template>
@@ -45,7 +60,7 @@ applySeo({
           Anda menyatakan telah membaca dan menyetujui kebijakan ini secara penuh.
         </p>
 
-        <h2>{{ locale === 'en' ? '1. Scope' : '1. Ruang Lingkup' }}</h2>
+        <h2 id="scope">{{ locale === 'en' ? '1. Scope' : '1. Ruang Lingkup' }}</h2>
         <p v-if="locale === 'en'">
           This policy applies to all pages, features, forms, content, and financial tools available at this domain and
           its localized paths (e.g. <code>/id/*</code>, <code>/en/*</code>).
@@ -55,7 +70,7 @@ applySeo({
           jalur lokalnya (misalnya <code>/id/*</code>, <code>/en/*</code>).
         </p>
 
-        <h2>{{ locale === 'en' ? '2. Information We May Collect' : '2. Informasi yang Dapat Dikumpulkan' }}</h2>
+        <h2 id="info-collected">{{ locale === 'en' ? '2. Information We May Collect' : '2. Informasi yang Dapat Dikumpulkan' }}</h2>
         <p v-if="locale === 'en'">We may collect non-personally-identifiable technical information such as:</p>
         <p v-else>Kami dapat mengumpulkan informasi teknis yang tidak bersifat identitas pribadi, di antaranya:</p>
         <ul>
@@ -77,7 +92,7 @@ applySeo({
           tertentu secara eksplisit memerlukannya (misalnya penyimpanan invoice untuk pengguna terdaftar).
         </p>
 
-        <h2>{{ locale === 'en' ? '3. Google AdSense & Advertising Cookies' : '3. Google AdSense & Cookie Iklan' }}</h2>
+        <h2 id="adsense">{{ locale === 'en' ? '3. Google AdSense & Advertising Cookies' : '3. Google AdSense & Cookie Iklan' }}</h2>
         <p v-if="locale === 'en'">
           This site uses <strong>Google AdSense</strong>, a third-party advertising service provided by Google LLC. Google AdSense
           uses cookies to serve advertisements based on your prior visits to this site or other sites on the internet. You may
@@ -101,7 +116,7 @@ applySeo({
           atau melalui <a href="https://www.networkadvertising.org/choices/" target="_blank" rel="noopener noreferrer">halaman opt-out Network Advertising Initiative</a>.
         </p>
 
-        <h2>{{ locale === 'en' ? '4. Cookies and Local Storage' : '4. Cookies dan Penyimpanan Lokal' }}</h2>
+        <h2 id="cookies">{{ locale === 'en' ? '4. Cookies and Local Storage' : '4. Cookies dan Penyimpanan Lokal' }}</h2>
         <p v-if="locale === 'en'">We use first-party cookies and local storage for the following functional purposes:</p>
         <p v-else>Kami menggunakan cookie pihak pertama dan penyimpanan lokal untuk tujuan fungsional berikut:</p>
         <ul>
@@ -113,7 +128,7 @@ applySeo({
           <li v-else>Menyimpan sementara input kalkulator untuk pengalaman yang lebih baik</li>
         </ul>
 
-        <h2>{{ locale === 'en' ? '5. How We Use Information' : '5. Penggunaan Informasi' }}</h2>
+        <h2 id="usage">{{ locale === 'en' ? '5. How We Use Information' : '5. Penggunaan Informasi' }}</h2>
         <ul>
           <li v-if="locale === 'en'">Ensure the site functions correctly and securely</li>
           <li v-else>Memastikan situs berfungsi dengan benar dan aman</li>
@@ -127,7 +142,7 @@ applySeo({
         <p v-if="locale === 'en'"><strong>We do not sell, trade, or rent personally identifiable information to third parties.</strong></p>
         <p v-else><strong>Kami tidak menjual, memperdagangkan, atau menyewakan informasi yang dapat mengidentifikasi pribadi kepada pihak ketiga.</strong></p>
 
-        <h2>{{ locale === 'en' ? '6. Third-Party Service Providers' : '6. Penyedia Layanan Pihak Ketiga' }}</h2>
+        <h2 id="third-party">{{ locale === 'en' ? '6. Third-Party Service Providers' : '6. Penyedia Layanan Pihak Ketiga' }}</h2>
         <ul>
           <li><strong>Google AdSense</strong> — <span v-if="locale === 'en'">serves display advertisements.</span><span v-else>menampilkan iklan bergambar.</span></li>
           <li><strong>Google Analytics</strong> — <span v-if="locale === 'en'">provides anonymized traffic insights.</span><span v-else>menyediakan wawasan lalu lintas yang dianonimkan.</span></li>
@@ -135,7 +150,7 @@ applySeo({
         <p v-if="locale === 'en'">We are not responsible for the privacy policies or practices of these third-party services.</p>
         <p v-else>Kami tidak bertanggung jawab atas kebijakan privasi atau praktik dari layanan pihak ketiga tersebut.</p>
 
-        <h2>{{ locale === 'en' ? '7. Data Security' : '7. Keamanan Data' }}</h2>
+        <h2 id="security">{{ locale === 'en' ? '7. Data Security' : '7. Keamanan Data' }}</h2>
         <p v-if="locale === 'en'">
           We apply commercially reasonable security measures to protect data processed on this site. However, no method of
           transmission over the internet is 100% secure.
@@ -145,7 +160,7 @@ applySeo({
           Namun, tidak ada metode transmisi melalui internet yang 100% aman.
         </p>
 
-        <h2>{{ locale === 'en' ? "8. Children's Privacy" : '8. Privasi Anak-Anak' }}</h2>
+        <h2 id="children">{{ locale === 'en' ? "8. Children's Privacy" : '8. Privasi Anak-Anak' }}</h2>
         <p v-if="locale === 'en'">
           This site is not directed to children under 13. We do not knowingly collect data from minors. If you believe we have
           inadvertently received data from a minor, please
@@ -157,7 +172,7 @@ applySeo({
           <RouterLink :to="buildLocalePath('/contact', locale)">hubungi kami</RouterLink> segera.
         </p>
 
-        <h2>{{ locale === 'en' ? '9. Changes to This Policy' : '9. Perubahan Kebijakan' }}</h2>
+        <h2 id="changes">{{ locale === 'en' ? '9. Changes to This Policy' : '9. Perubahan Kebijakan' }}</h2>
         <p v-if="locale === 'en'">
           This Privacy Policy may be updated from time to time. Continued use of the site after any changes constitutes
           your acceptance of the updated policy.
@@ -186,7 +201,14 @@ applySeo({
             {{ locale === 'en' ? 'Quick Navigation' : 'Navigasi Cepat' }}
           </p>
           <nav class="mt-4 space-y-2 text-sm">
-            <a v-for="n in (locale === 'en' ? ['1. Scope','2. Information Collected','3. Google AdSense Cookies','4. Cookies & Storage','5. Use of Information','6. Third Parties','7. Data Security','8. Children\'s Privacy','9. Policy Changes'] : ['1. Ruang Lingkup','2. Informasi Dikumpulkan','3. Cookie Google AdSense','4. Cookies & Penyimpanan','5. Penggunaan Informasi','6. Pihak Ketiga','7. Keamanan Data','8. Privasi Anak-Anak','9. Perubahan Kebijakan'])" :key="n" href="#" class="block text-slate-600 hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-300">{{ n }}</a>
+            <a
+              v-for="item in navItems"
+              :key="item.id"
+              :href="`#${item.id}`"
+              class="block text-slate-600 hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-300 transition-colors duration-150"
+            >
+              {{ item.label }}
+            </a>
           </nav>
           <div class="mt-6 border-t border-slate-200 pt-4 dark:border-white/10">
             <RouterLink :to="buildLocalePath('/disclaimer', locale)" class="block text-sm text-brand-600 hover:text-brand-800 dark:text-brand-400">
