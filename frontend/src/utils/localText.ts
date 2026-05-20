@@ -10,6 +10,7 @@ const texts: Record<string, TextMap> = {
   privacy: { id: 'Kebijakan Privasi', en: 'Privacy Policy' },
   terms: { id: 'Ketentuan Layanan', en: 'Terms of Service' },
   disclaimer: { id: 'Disclaimer', en: 'Disclaimer' },
+  glossary: { id: 'Kamus Finansial', en: 'Glossary' },
   sitemap: { id: 'Peta Situs', en: 'Sitemap' },
   landingSeo: { id: 'Landing SEO', en: 'SEO Landing' },
   toolsHeading: { id: 'Semua Tools', en: 'All Tools' },

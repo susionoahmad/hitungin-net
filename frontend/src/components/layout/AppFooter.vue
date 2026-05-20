@@ -20,6 +20,7 @@ const legalLinks = computed(() => [
   { label: t('privacy', locale.value), to: buildLocalePath('/privacy-policy', locale.value) },
   { label: t('terms', locale.value), to: buildLocalePath('/terms-of-service', locale.value) },
   { label: t('disclaimer', locale.value), to: buildLocalePath('/disclaimer', locale.value) },
+  { label: t('glossary', locale.value), to: buildLocalePath('/glossary', locale.value) },
   { label: t('about', locale.value), to: buildLocalePath('/about', locale.value) },
   { label: t('contact', locale.value), to: buildLocalePath('/contact', locale.value) },
   { label: t('sitemap', locale.value), to: buildLocalePath('/sitemap', locale.value) },

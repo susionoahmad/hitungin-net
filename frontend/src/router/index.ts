@@ -8,6 +8,7 @@ import SitemapPage from '@/pages/SitemapPage.vue';
 import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage.vue';
 import TermsOfServicePage from '@/pages/TermsOfServicePage.vue';
 import DisclaimerPage from '@/pages/DisclaimerPage.vue';
+import GlossaryPage from '@/pages/GlossaryPage.vue';
 import CheckEmailPage from '@/pages/CheckEmailPage.vue';
 import AuthCallbackPage from '@/pages/AuthCallbackPage.vue';
 import ResetPasswordPage from '@/pages/ResetPasswordPage.vue';
@@ -33,6 +34,7 @@ const staticRoutes: StaticRouteDef[] = [
   { path: '/privacy-policy', name: 'privacy-policy', component: PrivacyPolicyPage },
   { path: '/terms-of-service', name: 'terms-of-service', component: TermsOfServicePage },
   { path: '/disclaimer', name: 'disclaimer', component: DisclaimerPage },
+  { path: '/glossary', name: 'glossary', component: GlossaryPage },
   { path: '/check-email', name: 'check-email', component: CheckEmailPage },
   { path: '/auth/callback', name: 'auth-callback', component: AuthCallbackPage },
   { path: '/reset-password', name: 'reset-password', component: ResetPasswordPage },

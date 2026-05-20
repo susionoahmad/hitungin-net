@@ -45,6 +45,7 @@ const baseRoutes = [
   '/privacy-policy',
   '/terms-of-service',
   '/disclaimer',
+  '/glossary',
   '/invoice-generator',
   '/loan-calculator',
   '/kalkulator-diskon',

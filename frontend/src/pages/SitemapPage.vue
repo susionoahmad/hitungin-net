@@ -77,6 +77,7 @@ const staticPages = [
   { label: locale.value === 'en' ? 'Privacy Policy' : 'Kebijakan Privasi', to: buildLocalePath('/privacy-policy', locale.value) },
   { label: locale.value === 'en' ? 'Terms of Service' : 'Ketentuan Layanan', to: buildLocalePath('/terms-of-service', locale.value) },
   { label: locale.value === 'en' ? 'Disclaimer' : 'Disclaimer', to: buildLocalePath('/disclaimer', locale.value) },
+  { label: locale.value === 'en' ? 'Glossary' : 'Kamus Finansial', to: buildLocalePath('/glossary', locale.value) },
 ];
 </script>
 
