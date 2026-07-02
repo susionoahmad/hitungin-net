@@ -1440,17 +1440,30 @@ export const tools: ToolDefinition[] = [
       'Kalkulator denda keterlambatan membantu Anda menghitung bunga tambahan dari invoice yang dibayar melewati jatuh tempo. Tool ini berguna untuk administrasi penagihan yang lebih rapi.',
     content: [
       {
-        heading: 'Kenapa denda keterlambatan perlu dihitung?',
+        heading: 'Mengapa Perhitungan Denda Keterlambatan Sangat Penting?',
         paragraphs: [
-          'Dalam penagihan bisnis, keterlambatan pembayaran bisa mengganggu arus kas. Dengan menghitung denda secara konsisten, Anda dapat menjaga transparansi sekaligus memberi sinyal yang jelas kepada pelanggan tentang konsekuensi pembayaran terlambat.',
-          'Tool ini cocok untuk invoice freelance, layanan bulanan, maupun tagihan usaha kecil yang membutuhkan perhitungan tambahan ketika pembayaran melewati tenggat.',
+          'Setiap hari keterlambatan pembayaran berarti uang Anda tertahan di tangan orang lain. Padahal, Anda tetap harus membayar operasional, gaji karyawan, atau biaya sewa tepat waktu. Denda ini berfungsi sebagai kompensasi atas hilangnya nilai waktu dari uang (time value of money) tersebut.',
+          'Adanya klausul denda keterlambatan dalam kontrak memberikan dorongan psikologis bagi klien untuk memprioritaskan pembayaran invoice Anda dibanding kewajiban lainnya yang tidak memiliki konsekuensi denda.',
+          'Menghitung denda secara manual di kertas atau spreadsheet rentan terhadap kesalahan input atau rumus yang bisa memicu perdebatan dengan klien. Menggunakan kalkulator online yang konsisten memberikan hasil objektif yang dapat diterima dengan baik oleh kedua belah pihak.',
         ],
       },
       {
-        heading: 'Berguna untuk komunikasi billing',
+        heading: 'Panduan Langkah demi Langkah Menggunakan Kalkulator Denda',
         paragraphs: [
-          'Hasil perhitungan bisa langsung dipakai untuk menyiapkan pengingat pembayaran, revisi invoice, atau update ke tim keuangan. Karena nilainya dihitung otomatis, Anda tidak perlu menghitung ulang setiap kali tenggat berubah.',
-          'Halaman ini juga melengkapi invoice generator dan invoice tax breakdown calculator agar alur billing di situs tetap saling terhubung.',
+          'Menggunakan Kalkulator Denda Keterlambatan di kalkulatorin.com sangatlah praktis. Anda hanya perlu menyiapkan tiga data utama dari invoice Anda:',
+          '1. Masukkan Nilai Invoice (Jumlah Tagihan Asli): Ketikkan total nominal tagihan awal sebelum denda pada kolom Nilai Invoice. Sebagai contoh: Rp5.000.000.',
+          '2. Tentukan Suku Bunga (% per hari): Masukkan persentase bunga keterlambatan harian yang telah disepakati sebelumnya di kontrak kerja sama. Standar yang umum digunakan di Indonesia berkisar antara 0,1% hingga 0,2% per hari keterlambatan.',
+          '3. Masukkan Jumlah Hari Terlambat: Tuliskan berapa hari pembayaran tersebut telah melewati tanggal jatuh tempo yang seharusnya. Misalnya: 7 hari.',
+          '4. Dapatkan Hasil Perhitungan Instan: Kalkulator akan langsung memproses data tersebut dan menampilkan denda bunga (nominal rupiah dari akumulasi denda yang harus dibayar klien) serta total tagihan (gabungan antara nilai invoice asli dengan denda bunga yang harus dilunasi).',
+        ],
+      },
+      {
+        heading: 'Tips Cerdas Mengelola Piutang dan Menghadapi Klien yang Telat Bayar',
+        paragraphs: [
+          'Tulis Klausul dengan Jelas di Kontrak Sebelum Memulai Kerja Sama: Jangan pernah menagih denda jika hal tersebut tidak tertulis di awal kesepakatan (Term of Payment). Pastikan klien membaca dan menandatangani kontrak yang memuat persentase denda keterlambatan sebelum pekerjaan dimulai.',
+          'Kirimkan Pengingat (Reminder) Secara Berkala: Lakukan komunikasi yang sopan namun tegas. Kirim pengingat ramah H-7, H-3, dan tepat pada hari jatuh tempo pembayaran. Sering kali, keterlambatan terjadi murni karena klien lupa atau invoice terselip di tumpukan email mereka.',
+          'Tawarkan Insentif Pembayaran Cepat (Early Payment Discount): Selain memberikan konsekuensi denda, Anda juga bisa memberikan penghargaan. Misalnya, berikan diskon 2% jika tagihan dilunasi dalam waktu 10 hari sejak invoice terbit (skema 2/10 net 30). Cara ini sangat efektif untuk mempercepat uang masuk.',
+          'Gunakan Pendekatan Persuasif Terlebih Dahulu: Jika klien telat membayar, tanyakan kendala mereka secara kekeluargaan sebelum langsung menyodorkan invoice revisi dengan denda. Hubungan baik jangka panjang terkadang jauh lebih berharga dibandingkan nominal denda keterlambatan yang didapatkan.',
         ],
       },
     ],
