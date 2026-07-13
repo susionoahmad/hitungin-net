@@ -47,20 +47,24 @@ function withLocalePrefix(path: string, locale: string) {
 }
 
 const localizedStaticRoutes: RouteRecordRaw[] = staticRoutes.flatMap((route) =>
-  supportedLocales.map((locale) => ({
-    path: withLocalePrefix(route.path, locale),
-    name: `${route.name}-${locale}`,
-    component: route.component,
-  })) as RouteRecordRaw[],
+  supportedLocales
+    .filter((l) => l !== 'id')
+    .map((locale) => ({
+      path: withLocalePrefix(route.path, locale),
+      name: `${route.name}-${locale}`,
+      component: route.component,
+    })) as RouteRecordRaw[],
 );
 
 const localizedToolRoutes: RouteRecordRaw[] = tools.flatMap((tool) =>
-  supportedLocales.map((locale) => ({
-    path: `/${locale}/${tool.slug}`,
-    name: `${tool.slug}-${locale}`,
-    component: ToolDetailPage,
-    props: { slug: tool.slug, locale },
-  })) as RouteRecordRaw[],
+  supportedLocales
+    .filter((l) => l !== 'id')
+    .map((locale) => ({
+      path: `/${locale}/${tool.slug}`,
+      name: `${tool.slug}-${locale}`,
+      component: ToolDetailPage,
+      props: { slug: tool.slug, locale },
+    })) as RouteRecordRaw[],
 );
 
 const routes: RouteRecordRaw[] = [
@@ -73,6 +77,10 @@ const routes: RouteRecordRaw[] = [
     props: { slug: tool.slug, locale: 'id' },
   })) as RouteRecordRaw[],
   ...localizedToolRoutes,
+  {
+    path: '/id/:pathMatch(.*)*',
+    redirect: (to) => to.fullPath.replace(/^\/id/, '') || '/',
+  },
   { path: '/:pathMatch(.*)*', name: 'not-found', component: NotFoundPage },
 ];
 

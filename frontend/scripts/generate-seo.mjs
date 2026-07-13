@@ -91,7 +91,7 @@ const baseRoutes = [
   '/kalkulator-pesangon',
 ];
 
-const locales = ['id', 'en'];
+const locales = ['en'];
 const routes = [
   ...baseRoutes,
   ...locales.flatMap((locale) =>

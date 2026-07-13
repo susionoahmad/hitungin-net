@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/generate-seo.mjs && vue-tsc --noEmit && vite build",
+    "build": "node scripts/generate-seo.mjs && vue-tsc --noEmit && vite build && node --experimental-strip-types scripts/prerender.mjs",
     "seo:audit": "node --experimental-strip-types scripts/export-seo-audit.mjs",
     "preview": "vite preview",
     "typecheck": "vue-tsc --noEmit"

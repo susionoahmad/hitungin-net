@@ -20,6 +20,9 @@ export function stripLocalePrefix(path: string) {
 
 export function buildLocalePath(path: string, locale: Locale) {
   const base = stripLocalePrefix(path);
+  if (locale === 'id') {
+    return base;
+  }
   if (base === '/') return `/${locale}`;
   return `/${locale}${base}`;
 }

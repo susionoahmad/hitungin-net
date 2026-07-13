@@ -1,6 +1,18 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
+  "redirects": [
+    {
+      "source": "/id",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/id/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
