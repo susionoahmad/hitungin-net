@@ -1,6 +1,21 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
+  "headers": [
+    {
+      "source": "/ads.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    }
+  ],
   "redirects": [
     {
       "source": "/id",
@@ -15,8 +30,9 @@
   ],
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!ads\\.txt|sitemap\\.xml|robots\\.txt|site\\.webmanifest|favicon\\.svg|.*\\.).*)",
       "destination": "/index.html"
     }
   ]
 }
+

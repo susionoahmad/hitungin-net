@@ -43,9 +43,11 @@ watchEffect(() => {
 
   const toolPath = props.locale ? `/${props.locale}/${tool.value.slug}` : `/${tool.value.slug}`;
   const displayTool = presentedTool.value ?? tool.value;
+  const homePath = buildLocalePath('/', locale.value);
+  const toolsPath = buildLocalePath('/tools', locale.value);
   const breadcrumbItems = [
-    { name: t('home', locale.value), url: `${siteUrl}/${locale.value}` },
-    { name: t('allTools', locale.value), url: `${siteUrl}/${locale.value}/tools` },
+    { name: t('home', locale.value), url: `${siteUrl}${homePath === '/' ? '' : homePath}` },
+    { name: t('allTools', locale.value), url: `${siteUrl}${toolsPath}` },
     { name: displayTool.title, url: `${siteUrl}${toolPath}` },
   ];
 

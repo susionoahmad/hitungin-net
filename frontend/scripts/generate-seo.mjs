@@ -1,6 +1,6 @@
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, writeFile, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readFile } from 'node:fs/promises';
+import { tools } from '../src/data/tools.ts';
 
 function parseEnv(content) {
   const entries = {};
@@ -34,8 +34,9 @@ const baseUrl =
   process.env.VITE_SITE_URL ||
   process.env.SITE_URL ||
   (await loadEnvValue('VITE_SITE_URL')) ||
-  'https://example.com';
-const baseRoutes = [
+  'https://kalkulatorin.com';
+
+const staticRoutes = [
   '/',
   '/kalkulator-bisnis-keuangan-online',
   '/tools',
@@ -46,68 +47,30 @@ const baseRoutes = [
   '/terms-of-service',
   '/disclaimer',
   '/glossary',
-  '/invoice-generator',
-  '/loan-calculator',
-  '/kalkulator-diskon',
-  '/kalkulator-margin',
-  '/kalkulator-ppn',
-  '/break-even-point',
-  '/cash-flow-forecast',
-  '/percentage-calculator',
-  '/price-markup-calculator',
-  '/compound-interest-calculator',
-  '/roi-calculator',
-  '/net-profit-margin-calculator',
-  '/salary-take-home-calculator',
-  '/savings-goal-calculator',
-  '/flat-installment-calculator',
-  '/working-capital-calculator',
-  '/gross-margin-calculator',
-  '/revenue-projection-calculator',
-  '/expense-ratio-calculator',
-  '/tax-inclusive-price-calculator',
-  '/profit-calculator',
-  '/loan-affordability-calculator',
-  '/payment-due-date-calculator',
-  '/unit-cost-calculator',
-  '/simple-interest-calculator',
-  '/discount-reverse-calculator',
-  '/vat-reverse-calculator',
-  '/sales-commission-calculator',
-  '/break-even-revenue-calculator',
-  '/profit-target-calculator',
-  '/late-payment-interest-calculator',
-  '/subscription-pricing-calculator',
-  '/safety-stock-calculator',
-  '/invoice-due-date-calculator',
-  '/average-order-value-calculator',
-  '/kalkulator-zakat',
-  '/kalkulator-dana-darurat',
-  '/kalkulator-inflasi',
-  '/kalkulator-dana-pendidikan',
-  '/kalkulator-pelunasan-hutang',
-  '/kalkulator-pph-21',
-  '/kalkulator-thr',
-  '/kalkulator-pesangon',
 ];
 
-const locales = ['en'];
-const routes = [
-  ...baseRoutes,
-  ...locales.flatMap((locale) =>
-    baseRoutes.map((route) => {
-      if (route === '/') return `/${locale}`;
-      return `/${locale}${route}`;
-    }),
-  ),
+const toolRoutes = tools.map((tool) => `/${tool.slug}`);
+
+// Default Indonesian routes (no /id/ prefix)
+const idRoutes = [
+  ...staticRoutes,
+  ...toolRoutes,
 ];
+
+// English routes (/en prefix)
+const enRoutes = [
+  ...staticRoutes.map((route) => (route === '/' ? '/en' : `/en${route}`)),
+  ...tools.map((tool) => `/en/${tool.slug}`),
+];
+
+const allRoutes = [...idRoutes, ...enRoutes];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes
+${allRoutes
   .map(
     (route) => `  <url>
-    <loc>${baseUrl}${route}</loc>
+    <loc>${baseUrl}${route === '/' ? '' : route}</loc>
   </url>`,
   )
   .join('\n')}
@@ -123,3 +86,6 @@ const publicDir = resolve(process.cwd(), 'public');
 await mkdir(publicDir, { recursive: true });
 await writeFile(resolve(publicDir, 'sitemap.xml'), sitemap, 'utf8');
 await writeFile(resolve(publicDir, 'robots.txt'), robots, 'utf8');
+
+console.log(`Generated sitemap.xml with ${allRoutes.length} URLs and robots.txt`);
+

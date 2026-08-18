@@ -23,7 +23,7 @@ applySeo({
       : 'Kalkulator bisnis dan keuangan online gratis untuk invoice, pinjaman, margin, PPN, ROI, dan proyeksi pendapatan di Indonesia.',
   canonical: `${siteUrl}${locale.value === 'en' ? '/en/kalkulator-bisnis-keuangan-online' : '/kalkulator-bisnis-keuangan-online'}`,
   alternates: [
-    { hreflang: 'id', href: `${siteUrl}/id/kalkulator-bisnis-keuangan-online` },
+    { hreflang: 'id', href: `${siteUrl}/kalkulator-bisnis-keuangan-online` },
     { hreflang: 'en', href: `${siteUrl}/en/kalkulator-bisnis-keuangan-online` },
     { hreflang: 'x-default', href: `${siteUrl}/kalkulator-bisnis-keuangan-online` },
   ],

@@ -22,7 +22,7 @@ applySeo({
       : 'Daftar lengkap tools bisnis dan keuangan Indonesia yang siap dipakai secara online.',
   canonical: `${siteUrl}${locale.value === 'en' ? '/en/tools' : '/tools'}`,
   alternates: [
-    { hreflang: 'id', href: `${siteUrl}/id/tools` },
+    { hreflang: 'id', href: `${siteUrl}/tools` },
     { hreflang: 'en', href: `${siteUrl}/en/tools` },
     { hreflang: 'x-default', href: `${siteUrl}/tools` },
   ],

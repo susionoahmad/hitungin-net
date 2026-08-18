@@ -28,9 +28,9 @@ applySeo({
     locale.value === 'en'
       ? 'Business and finance tools for invoices, loans, discounts, margin, VAT, and more.'
       : siteDescription,
-  canonical: hasLocalePrefix.value ? `${siteUrl}/${locale.value}` : siteUrl,
+  canonical: locale.value === 'en' ? `${siteUrl}/en` : siteUrl,
   alternates: [
-    { hreflang: 'id', href: `${siteUrl}/id` },
+    { hreflang: 'id', href: siteUrl },
     { hreflang: 'en', href: `${siteUrl}/en` },
     { hreflang: 'x-default', href: siteUrl },
   ],

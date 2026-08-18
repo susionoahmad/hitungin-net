@@ -19,7 +19,7 @@ applySeo({
       : 'Peta situs visual Tools Bisnis & Keuangan Indonesia untuk navigasi yang lebih mudah.',
   canonical: `${siteUrl}${locale.value === 'en' ? '/en/sitemap' : '/sitemap'}`,
   alternates: [
-    { hreflang: 'id', href: `${siteUrl}/id/sitemap` },
+    { hreflang: 'id', href: `${siteUrl}/sitemap` },
     { hreflang: 'en', href: `${siteUrl}/en/sitemap` },
     { hreflang: 'x-default', href: `${siteUrl}/sitemap` },
   ],
