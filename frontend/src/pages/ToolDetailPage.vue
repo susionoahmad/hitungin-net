@@ -41,7 +41,7 @@ watchEffect(() => {
     return;
   }
 
-  const toolPath = props.locale ? `/${props.locale}/${tool.value.slug}` : `/${tool.value.slug}`;
+  const toolPath = buildLocalePath(`/${tool.value.slug}`, locale.value);
   const displayTool = presentedTool.value ?? tool.value;
   const homePath = buildLocalePath('/', locale.value);
   const toolsPath = buildLocalePath('/tools', locale.value);
