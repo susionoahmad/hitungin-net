@@ -1,11 +1,14 @@
 import { onBeforeUnmount, onMounted } from 'vue';
-import { siteName, siteUrl } from '@/utils/site';
+import { siteBrand, siteName, siteUrl } from '@/utils/site';
 
 type SeoOptions = {
   title: string;
   description: string;
   canonical?: string;
   image?: string;
+  type?: 'website' | 'article';
+  robots?: string;
+  lang?: 'id' | 'en';
   alternates?: Array<{ hreflang: string; href: string }>;
   schema?: Record<string, unknown> | Record<string, unknown>[];
 };
@@ -30,6 +33,13 @@ function setProperty(property: string, content: string) {
   tag.content = content;
 }
 
+function removeWrongOgMeta() {
+  const ogNames = ['og:title', 'og:description', 'og:image', 'og:site_name', 'og:url', 'og:type', 'og:locale'];
+  for (const name of ogNames) {
+    document.head.querySelector(`meta[name="${name}"]`)?.remove();
+  }
+}
+
 function setJsonLd(schema?: Record<string, unknown> | Record<string, unknown>[]) {
   const existing = document.getElementById('page-jsonld');
   if (existing) existing.remove();
@@ -42,19 +52,34 @@ function setJsonLd(schema?: Record<string, unknown> | Record<string, unknown>[])
 }
 
 export function applySeo(options: SeoOptions) {
+  if (typeof document === 'undefined') return;
+
+  const lang = options.lang ?? (window.location.pathname.startsWith('/en') ? 'en' : 'id');
+  document.documentElement.lang = lang;
+
   document.title = options.title;
+  removeWrongOgMeta();
   setMeta('description', options.description);
-  setMeta('og:title', options.title);
-  setMeta('og:description', options.description);
-  const ogImage = options.image ? new URL(options.image, siteUrl).toString() : new URL('/og-image.svg', siteUrl).toString();
-  setMeta('og:image', ogImage);
-  setMeta('og:site_name', siteName);
-  setMeta('og:url', options.canonical || window.location.href);
+  setMeta('robots', options.robots ?? (lang === 'en' ? 'noindex, follow' : 'index, follow'));
+
+  const ogImage = options.image
+    ? new URL(options.image, siteUrl).toString()
+    : new URL('/og-image.svg', siteUrl).toString();
+  const canonicalUrl = options.canonical || window.location.href;
+
+  setProperty('og:title', options.title);
+  setProperty('og:description', options.description);
+  setProperty('og:image', ogImage);
+  setProperty('og:site_name', siteBrand);
+  setProperty('og:url', canonicalUrl);
+  setProperty('og:type', options.type ?? 'website');
+  setProperty('og:locale', lang === 'en' ? 'en_US' : 'id_ID');
+
   setMeta('twitter:card', 'summary_large_image');
   setMeta('twitter:title', options.title);
   setMeta('twitter:description', options.description);
   setMeta('twitter:image', ogImage);
-  setProperty('og:type', 'website');
+
   if (options.canonical) {
     let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!link) {
@@ -64,10 +89,9 @@ export function applySeo(options: SeoOptions) {
     }
     link.href = options.canonical;
   }
-  document
-    .querySelectorAll('link[rel="alternate"][hreflang]')
-    .forEach((node) => node.remove());
-  if (options.alternates) {
+
+  document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((node) => node.remove());
+  if (options.alternates && options.alternates.length > 0) {
     for (const alternate of options.alternates) {
       const link = document.createElement('link');
       link.rel = 'alternate';
@@ -76,6 +100,7 @@ export function applySeo(options: SeoOptions) {
       document.head.appendChild(link);
     }
   }
+
   setJsonLd(options.schema);
 }
 
@@ -125,9 +150,68 @@ export function createWebPageSchema(options: { name: string; description: string
     name: options.name,
     description: options.description,
     url: options.url,
+    inLanguage: 'id-ID',
     isPartOf: {
       '@type': 'WebSite',
       name: siteName,
+      url: siteUrl,
+    },
+  };
+}
+
+export function createSoftwareAppSchema(options: {
+  name: string;
+  description: string;
+  url: string;
+  category: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: options.name,
+    description: options.description,
+    url: options.url,
+    applicationCategory: 'FinanceApplication',
+    applicationSubCategory: options.category,
+    operatingSystem: 'All',
+    inLanguage: 'id-ID',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'IDR',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: siteBrand,
+      url: siteUrl,
+    },
+  };
+}
+
+export function createArticleSchema(options: {
+  headline: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  dateModified: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: options.headline,
+    description: options.description,
+    url: options.url,
+    inLanguage: 'id-ID',
+    datePublished: options.datePublished,
+    dateModified: options.dateModified,
+    author: {
+      '@type': 'Organization',
+      name: `Tim Editorial ${siteBrand}`,
+      url: `${siteUrl}/about`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: siteBrand,
       url: siteUrl,
     },
   };

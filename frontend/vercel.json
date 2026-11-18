@@ -1,6 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/ads.txt",
@@ -30,9 +32,28 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!ads\\.txt|sitemap\\.xml|robots\\.txt|site\\.webmanifest|favicon\\.svg|.*\\.).*)",
-      "destination": "/index.html"
+      "source": "/en",
+      "destination": "/spa.html"
+    },
+    {
+      "source": "/en/:path*",
+      "destination": "/spa.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/spa.html"
+    },
+    {
+      "source": "/auth/:path*",
+      "destination": "/spa.html"
+    },
+    {
+      "source": "/check-email",
+      "destination": "/spa.html"
+    },
+    {
+      "source": "/reset-password",
+      "destination": "/spa.html"
     }
   ]
 }
-

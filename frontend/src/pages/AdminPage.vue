@@ -3,6 +3,15 @@ import { ref, computed, watch } from 'vue';
 import { apiRequest } from '@/data/api';
 import { useAuth } from '@/composables/useAuth';
 import { useRouter } from 'vue-router';
+import { applySeo } from '@/utils/seo';
+import { siteBrand, siteUrl } from '@/utils/site';
+
+applySeo({
+  title: `Admin | ${siteBrand}`,
+  description: 'Panel administrasi internal.',
+  canonical: `${siteUrl}/admin`,
+  robots: 'noindex, nofollow',
+});
 
 const { user, profile, isAdmin, isInitialized } = useAuth();
 const router = useRouter();

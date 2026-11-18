@@ -42,11 +42,7 @@ applySeo({
   title: `${ui.value.title} | ${siteName}`,
   description: ui.value.description,
   canonical: `${siteUrl}${buildLocalePath('/check-email', locale.value)}`,
-  alternates: [
-    { hreflang: 'id', href: `${siteUrl}${buildLocalePath('/check-email', 'id')}` },
-    { hreflang: 'en', href: `${siteUrl}${buildLocalePath('/check-email', 'en')}` },
-    { hreflang: 'x-default', href: `${siteUrl}/check-email` },
-  ],
+  robots: 'noindex, nofollow',
 })
 </script>
 

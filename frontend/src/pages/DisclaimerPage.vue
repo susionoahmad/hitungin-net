@@ -1,27 +1,37 @@
-﻿<script setup lang="ts">
-import { computed } from 'vue';
+<script setup lang="ts">
+import { computed, watchEffect } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 import Breadcrumbs from '@/components/common/Breadcrumbs.vue';
 import SectionHeading from '@/components/common/SectionHeading.vue';
-import { applySeo } from '@/utils/seo';
+import { applySeo, createBreadcrumbSchema, createWebPageSchema } from '@/utils/seo';
 import { buildLocalePath, detectLocaleFromPath } from '@/utils/locale';
-import { siteName, siteUrl } from '@/utils/site';
+import { siteBrand, siteName, siteUrl } from '@/utils/site';
 
 const route = useRoute();
 const locale = computed(() => detectLocaleFromPath(route.path));
 
-applySeo({
-  title: locale.value === 'en' ? `Disclaimer | ${siteName}` : `Disclaimer | ${siteName}`,
-  description:
-    locale.value === 'en'
-      ? 'Important disclaimers and limitations of use for calculation results on Tools Bisnis & Keuangan Indonesia.'
-      : 'Pernyataan pengecualian tanggung jawab dan batasan penggunaan hasil perhitungan pada Tools Bisnis & Keuangan Indonesia.',
-  canonical: `${siteUrl}${buildLocalePath('/disclaimer', locale.value)}`,
-  alternates: [
-    { hreflang: 'id', href: `${siteUrl}${buildLocalePath('/disclaimer', 'id')}` },
-    { hreflang: 'en', href: `${siteUrl}${buildLocalePath('/disclaimer', 'en')}` },
-    { hreflang: 'x-default', href: `${siteUrl}/disclaimer` },
-  ],
+watchEffect(() => {
+  const isEn = locale.value === 'en';
+  const path = buildLocalePath('/disclaimer', locale.value);
+  const title = `Disclaimer | ${siteBrand}`;
+  const description = isEn
+    ? `Important disclaimers and limitations of use for calculation results on ${siteName}.`
+    : `Pernyataan pengecualian tanggung jawab dan batasan penggunaan hasil simulasi pada ${siteName}.`;
+
+  applySeo({
+    title,
+    description,
+    canonical: `${siteUrl}${path}`,
+    lang: locale.value,
+    robots: isEn ? 'noindex, follow' : 'index, follow',
+    schema: [
+      createWebPageSchema({ name: title, description, url: `${siteUrl}${path}` }),
+      createBreadcrumbSchema([
+        { name: isEn ? 'Home' : 'Beranda', url: isEn ? `${siteUrl}/en` : siteUrl },
+        { name: 'Disclaimer', url: `${siteUrl}${path}` },
+      ]),
+    ],
+  });
 });
 </script>
 

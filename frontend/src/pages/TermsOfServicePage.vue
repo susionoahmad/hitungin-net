@@ -1,27 +1,37 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import Breadcrumbs from '@/components/common/Breadcrumbs.vue';
 import SectionHeading from '@/components/common/SectionHeading.vue';
-import { applySeo } from '@/utils/seo';
+import { applySeo, createBreadcrumbSchema, createWebPageSchema } from '@/utils/seo';
 import { buildLocalePath, detectLocaleFromPath } from '@/utils/locale';
-import { siteName, siteUrl } from '@/utils/site';
+import { siteBrand, siteName, siteUrl } from '@/utils/site';
 
 const route = useRoute();
 const locale = computed(() => detectLocaleFromPath(route.path));
 
-applySeo({
-  title: locale.value === 'en' ? `Terms of Service | ${siteName}` : `Ketentuan Layanan | ${siteName}`,
-  description:
-    locale.value === 'en'
-      ? 'Terms of service for using Tools Bisnis & Keuangan Indonesia.'
-      : 'Ketentuan penggunaan situs Tools Bisnis & Keuangan Indonesia.',
-  canonical: `${siteUrl}${buildLocalePath('/terms-of-service', locale.value)}`,
-  alternates: [
-    { hreflang: 'id', href: `${siteUrl}${buildLocalePath('/terms-of-service', 'id')}` },
-    { hreflang: 'en', href: `${siteUrl}${buildLocalePath('/terms-of-service', 'en')}` },
-    { hreflang: 'x-default', href: `${siteUrl}/terms-of-service` },
-  ],
+watchEffect(() => {
+  const isEn = locale.value === 'en';
+  const path = buildLocalePath('/terms-of-service', locale.value);
+  const title = isEn ? `Terms of Service | ${siteBrand}` : `Ketentuan Layanan | ${siteBrand}`;
+  const description = isEn
+    ? `Terms of service for using ${siteName}.`
+    : `Ketentuan dan syarat penggunaan kalkulator serta konten pada ${siteName}.`;
+
+  applySeo({
+    title,
+    description,
+    canonical: `${siteUrl}${path}`,
+    lang: locale.value,
+    robots: isEn ? 'noindex, follow' : 'index, follow',
+    schema: [
+      createWebPageSchema({ name: title, description, url: `${siteUrl}${path}` }),
+      createBreadcrumbSchema([
+        { name: isEn ? 'Home' : 'Beranda', url: isEn ? `${siteUrl}/en` : siteUrl },
+        { name: isEn ? 'Terms of Service' : 'Ketentuan Layanan', url: `${siteUrl}${path}` },
+      ]),
+    ],
+  });
 });
 </script>
 

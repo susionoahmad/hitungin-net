@@ -1,27 +1,37 @@
-﻿<script setup lang="ts">
-import { computed } from 'vue';
+<script setup lang="ts">
+import { computed, watchEffect } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 import Breadcrumbs from '@/components/common/Breadcrumbs.vue';
 import SectionHeading from '@/components/common/SectionHeading.vue';
-import { applySeo } from '@/utils/seo';
+import { applySeo, createBreadcrumbSchema, createWebPageSchema } from '@/utils/seo';
 import { buildLocalePath, detectLocaleFromPath } from '@/utils/locale';
-import { siteName, siteUrl } from '@/utils/site';
+import { siteBrand, siteName, siteUrl } from '@/utils/site';
 
 const route = useRoute();
 const locale = computed(() => detectLocaleFromPath(route.path));
 
-applySeo({
-  title: locale.value === 'en' ? `Privacy Policy | ${siteName}` : `Kebijakan Privasi | ${siteName}`,
-  description:
-    locale.value === 'en'
-      ? 'Privacy policy for Tools Bisnis & Keuangan Indonesia, including how Google AdSense cookies and data are handled.'
-      : 'Kebijakan privasi penggunaan situs Tools Bisnis & Keuangan Indonesia, termasuk penggunaan cookie Google AdSense.',
-  canonical: `${siteUrl}${buildLocalePath('/privacy-policy', locale.value)}`,
-  alternates: [
-    { hreflang: 'id', href: `${siteUrl}${buildLocalePath('/privacy-policy', 'id')}` },
-    { hreflang: 'en', href: `${siteUrl}${buildLocalePath('/privacy-policy', 'en')}` },
-    { hreflang: 'x-default', href: `${siteUrl}/privacy-policy` },
-  ],
+watchEffect(() => {
+  const isEn = locale.value === 'en';
+  const path = buildLocalePath('/privacy-policy', locale.value);
+  const title = isEn ? `Privacy Policy | ${siteBrand}` : `Kebijakan Privasi | ${siteBrand}`;
+  const description = isEn
+    ? `Privacy policy for ${siteName}, including browser-side calculation privacy, Google Analytics, and Google AdSense cookies.`
+    : `Kebijakan privasi penggunaan situs ${siteName}, termasuk privasi input kalkulator, cookie analitik, dan Google AdSense.`;
+
+  applySeo({
+    title,
+    description,
+    canonical: `${siteUrl}${path}`,
+    lang: locale.value,
+    robots: isEn ? 'noindex, follow' : 'index, follow',
+    schema: [
+      createWebPageSchema({ name: title, description, url: `${siteUrl}${path}` }),
+      createBreadcrumbSchema([
+        { name: isEn ? 'Home' : 'Beranda', url: isEn ? `${siteUrl}/en` : siteUrl },
+        { name: isEn ? 'Privacy Policy' : 'Kebijakan Privasi', url: `${siteUrl}${path}` },
+      ]),
+    ],
+  });
 });
 
 const navItems = computed(() => {
@@ -62,12 +72,10 @@ const navItems = computed(() => {
 
         <h2 id="scope">{{ locale === 'en' ? '1. Scope' : '1. Ruang Lingkup' }}</h2>
         <p v-if="locale === 'en'">
-          This policy applies to all pages, features, forms, content, and financial tools available at this domain and
-          its localized paths (e.g. <code>/id/*</code>, <code>/en/*</code>).
+          This policy applies to all pages, calculators, guides, and features available on <strong>kalkulatorin.com</strong>.
         </p>
         <p v-else>
-          Kebijakan ini berlaku untuk seluruh halaman, fitur, formulir, konten, dan tools yang tersedia di domain ini dan
-          jalur lokalnya (misalnya <code>/id/*</code>, <code>/en/*</code>).
+          Kebijakan ini berlaku untuk seluruh halaman, kalkulator, panduan, dan fitur yang tersedia pada domain <strong>kalkulatorin.com</strong>.
         </p>
 
         <h2 id="info-collected">{{ locale === 'en' ? '2. Information We May Collect' : '2. Informasi yang Dapat Dikumpulkan' }}</h2>
@@ -106,13 +114,13 @@ const navItems = computed(() => {
           <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Setelan Iklan Google</a>.
         </p>
         <p v-if="locale === 'en'">
-          Google AdSense also uses <strong>DoubleClick DART cookies</strong> to serve ads. You can opt out of DART cookies via the
-          <a href="http://www.google.com/privacy_ads.html" target="_blank" rel="noopener noreferrer">Google Ad and Content Network privacy policy</a>
+          Google and its partners use advertising cookies to serve relevant ads. You can learn more or opt out via
+          <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google Advertising Policies</a>
           or through the <a href="https://www.networkadvertising.org/choices/" target="_blank" rel="noopener noreferrer">Network Advertising Initiative opt-out page</a>.
         </p>
         <p v-else>
-          Google AdSense juga menggunakan <strong>cookie DoubleClick DART</strong>. Anda dapat menonaktifkannya melalui
-          <a href="http://www.google.com/privacy_ads.html" target="_blank" rel="noopener noreferrer">kebijakan privasi Jaringan Iklan Google</a>
+          Google beserta mitranya menggunakan cookie iklan untuk menayangkan iklan yang relevan. Anda dapat mempelajari lebih lanjut atau menonaktifkannya melalui
+          <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Kebijakan Teknologi Iklan Google</a>
           atau melalui <a href="https://www.networkadvertising.org/choices/" target="_blank" rel="noopener noreferrer">halaman opt-out Network Advertising Initiative</a>.
         </p>
 
@@ -184,11 +192,11 @@ const navItems = computed(() => {
 
         <div class="mt-8 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-slate-400">
           <span v-if="locale === 'en'">
-            <strong>Last Updated:</strong> May 2026. For questions, visit our
+            <strong>Last Updated:</strong> November 2026. For questions, visit our
             <RouterLink :to="buildLocalePath('/contact', locale)" class="text-brand-600 dark:text-brand-400">Contact page</RouterLink>.
           </span>
           <span v-else>
-            <strong>Terakhir Diperbarui:</strong> Mei 2026. Untuk pertanyaan, kunjungi
+            <strong>Terakhir Diperbarui:</strong> November 2026. Untuk pertanyaan, kunjungi
             <RouterLink :to="buildLocalePath('/contact', locale)" class="text-brand-600 dark:text-brand-400">halaman Kontak</RouterLink> kami.
           </span>
         </div>

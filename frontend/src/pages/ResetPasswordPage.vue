@@ -90,11 +90,7 @@ applySeo({
   title: `${ui.value.title} | ${siteName}`,
   description: ui.value.description,
   canonical: `${siteUrl}${buildLocalePath('/reset-password', locale.value)}`,
-  alternates: [
-    { hreflang: 'id', href: `${siteUrl}${buildLocalePath('/reset-password', 'id')}` },
-    { hreflang: 'en', href: `${siteUrl}${buildLocalePath('/reset-password', 'en')}` },
-    { hreflang: 'x-default', href: `${siteUrl}/reset-password` },
-  ],
+  robots: 'noindex, nofollow',
 })
 
 async function handleSubmit() {

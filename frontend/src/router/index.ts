@@ -9,6 +9,8 @@ import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage.vue';
 import TermsOfServicePage from '@/pages/TermsOfServicePage.vue';
 import DisclaimerPage from '@/pages/DisclaimerPage.vue';
 import GlossaryPage from '@/pages/GlossaryPage.vue';
+import GuidesIndexPage from '@/pages/GuidesIndexPage.vue';
+import GuideDetailPage from '@/pages/GuideDetailPage.vue';
 import CheckEmailPage from '@/pages/CheckEmailPage.vue';
 import AuthCallbackPage from '@/pages/AuthCallbackPage.vue';
 import ResetPasswordPage from '@/pages/ResetPasswordPage.vue';
@@ -35,6 +37,8 @@ const staticRoutes: StaticRouteDef[] = [
   { path: '/terms-of-service', name: 'terms-of-service', component: TermsOfServicePage },
   { path: '/disclaimer', name: 'disclaimer', component: DisclaimerPage },
   { path: '/glossary', name: 'glossary', component: GlossaryPage },
+  { path: '/panduan', name: 'guides', component: GuidesIndexPage },
+  { path: '/panduan/:slug', name: 'guide-detail', component: GuideDetailPage },
   { path: '/check-email', name: 'check-email', component: CheckEmailPage },
   { path: '/auth/callback', name: 'auth-callback', component: AuthCallbackPage },
   { path: '/reset-password', name: 'reset-password', component: ResetPasswordPage },

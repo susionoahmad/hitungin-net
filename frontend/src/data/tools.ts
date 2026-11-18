@@ -46,7 +46,7 @@ export const tools: ToolDefinition[] = [
     description: 'Buat invoice profesional dengan nomor otomatis, item dinamis, PPN 11%, dan ekspor PDF.',
     category: 'Bisnis',
     component: () => import('@/components/tools/InvoiceGeneratorTool.vue'),
-    seoTitle: 'Invoice Generator Online | Tools Bisnis & Keuangan Indonesia',
+    seoTitle: 'Invoice Generator Online Gratis PDF | Kalkulatorin',
     seoDescription:
       'Buat invoice profesional secara cepat dengan nomor otomatis, kalkulasi PPN 11%, item dinamis, dan ekspor PDF.',
     intro:
@@ -70,7 +70,7 @@ export const tools: ToolDefinition[] = [
         heading: 'Tips penggunaan untuk bisnis',
         paragraphs: [
           'Agar invoice lebih efektif, gunakan deskripsi item yang ringkas namun jelas, sertakan tanggal transaksi, dan pastikan nominal pajak sesuai dengan kebijakan bisnis Anda. Bila Anda menjual produk yang sudah termasuk pajak, tampilkan detail pajaknya secara transparan agar pelanggan memahami total yang dibayar.',
-          'Untuk ke depan, struktur data invoice pada tool ini mudah diperluas. Anda bisa menambahkan logo, alamat perusahaan, diskon, nomor PO, atau template berbeda tanpa mengubah arsitektur utama. Itulah alasan sistem berbasis konfigurasi dipilih: tambah fitur baru cukup di satu tempat, lalu halaman lain tetap ikut terhubung dengan baik.',
+          'Pastikan pula setiap invoice mencantumkan informasi rekening bank yang jelas, tanggal jatuh tempo pembayaran, serta catatan singkat jika ada termin khusus agar proses pencairan dari bagian finance klien berjalan lebih cepat tanpa revisi berulang.',
         ],
       },
     ],
@@ -120,7 +120,7 @@ export const tools: ToolDefinition[] = [
         heading: 'Kapan simulasi ini paling berguna?',
         paragraphs: [
           'Alat ini relevan saat Anda sedang memilih kredit modal kerja, cicilan kendaraan operasional, pembiayaan alat produksi, atau pembelian inventaris. Dengan simulasi yang cepat, Anda bisa membandingkan skema bank dan menentukan pilihan yang paling sehat untuk arus kas.',
-          'Ke depannya, sistem ini mudah diperluas untuk mendukung bunga flat, efektif, atau skema khusus lainnya. Arsitektur data-driven membuat kita bisa menambah variasi kalkulasi tanpa merombak halaman dan navigasi utama.',
+          'Bandingkan pula hasil simulasi anuitas ini dengan skema bunga flat atau uji kemampuan cicilan bulanan Anda agar keputusan pembiayaan tetap selaras dengan kestabilan arus kas jangka panjang.',
         ],
       },
     ],
@@ -170,7 +170,7 @@ export const tools: ToolDefinition[] = [
     faqs: [
       {
         question: 'Apakah kalkulator ini bisa menghitung diskon bertingkat?',
-        answer: 'Saat ini fokus pada satu diskon utama, tetapi struktur aplikasinya mudah diperluas untuk diskon bertingkat.',
+        answer: 'Saat ini kalkulator fokus pada satu lapisan diskon utama; untuk diskon bertingkat seperti 20% + 10%, Anda cukup menghitung potongan pertama lalu memasukkan hasilnya sebagai harga awal tahap kedua.',
       },
       {
         question: 'Apakah hasilnya menggunakan Rupiah?',
@@ -280,7 +280,7 @@ export const tools: ToolDefinition[] = [
         heading: 'Kegunaan praktis',
         paragraphs: [
           'Dengan mengetahui break even point, Anda bisa menilai apakah strategi promosi masih aman, apakah harga terlalu rendah, atau apakah perlu menaikkan margin. Informasi ini penting terutama saat bisnis sedang tumbuh dan setiap keputusan harga punya dampak langsung pada cash flow.',
-          'Ke depannya, tool seperti ini mudah diperluas untuk simulasi beberapa skenario harga sekaligus. Karena data tool disimpan di satu konfigurasi, penambahan varian perhitungan tidak perlu mengubah arsitektur halaman inti.',
+          'Lakukan simulasi ulang titik impas setiap kali terjadi kenaikan harga bahan baku, penyesuaian sewa tempat, atau perubahan gaji staf agar target penjualan bulanan Anda selalu akurat.',
         ],
       },
     ],
@@ -319,7 +319,7 @@ export const tools: ToolDefinition[] = [
         heading: 'Manfaat untuk perencanaan',
         paragraphs: [
           'Saat Anda tahu bulan mana yang berpotensi defisit, Anda bisa menyiapkan cadangan kas atau menggeser jadwal pengeluaran. Ini sangat penting bagi UMKM dan bisnis yang pendapatannya tidak stabil setiap bulan. Proyeksi sederhana sering kali sudah cukup untuk mencegah keputusan yang terlalu berisiko.',
-          'Seiring pertumbuhan situs, tool ini juga mudah dikembangkan menjadi versi yang lebih lengkap dengan kategori pemasukan, pengeluaran rutin, dan analisis saldo kumulatif. Struktur data terpusat menjaga semuanya tetap rapi.',
+          'Lakukan pembaruan proyeksi setiap akhir bulan dengan mencocokkan perkiraan awal terhadap mutasi rekening aktual agar akurasi perencanaan kas usaha semakin tajam dari waktu ke waktu.',
         ],
       },
     ],
@@ -358,7 +358,7 @@ export const tools: ToolDefinition[] = [
         heading: 'Lebih mudah dibanding hitung manual',
         paragraphs: [
           'Alih-alih menulis rumus di kalkulator fisik atau spreadsheet, cukup masukkan nilai dasar dan persentasenya. Hasil yang rapi dan konsisten membantu mengurangi kesalahan perhitungan, terutama ketika Anda harus membandingkan beberapa skenario dalam waktu singkat.',
-          'Tool ini juga membuka peluang untuk turunan konten SEO yang luas, karena halaman persentase sangat relevan untuk pengguna umum maupun pencarian bisnis yang lebih spesifik.',
+          'Biasakan memeriksa ulang basis pembanding persentase (apakah dari harga awal, harga jual, atau angka periode sebelumnya) supaya analisis angka di laporan maupun negosiasi tetap presisi.',
         ],
       },
     ],
@@ -397,7 +397,7 @@ export const tools: ToolDefinition[] = [
         heading: 'Cocok untuk bisnis produk dan jasa',
         paragraphs: [
           'Tool ini dapat digunakan untuk produk fisik, jasa kreatif, atau penawaran paket. Saat Anda mengetahui markup yang sesuai, proses negosiasi dengan pelanggan jadi lebih tenang karena angka dasar sudah ditetapkan secara rasional.',
-          'Dengan struktur modular, tool ini mudah dijadikan pintu masuk ke konten lain seperti margin calculator, break even point, dan invoice generator yang saling terhubung secara internal.',
+          'Setelah mendapatkan harga jual dari target markup, lanjutkan pengecekan dengan kalkulator margin dan titik impas (BEP) untuk memastikan harga tersebut tetap mampu menutup seluruh biaya operasional usaha.',
         ],
       },
     ],
@@ -436,7 +436,7 @@ export const tools: ToolDefinition[] = [
         heading: 'Cocok untuk edukasi dan perencanaan',
         paragraphs: [
           'Alat ini bukan nasihat investasi, tetapi sangat berguna untuk ilustrasi dan pembelajaran. Saat pengguna memahami efek compounding, mereka biasanya lebih mudah melihat kenapa konsistensi setoran dan durasi investasi sangat berpengaruh terhadap hasil akhir.',
-          'Ke depan, Anda bisa menambahkan fitur setoran bulanan, inflasi, atau target nilai akhir tanpa mengubah fondasi arsitektur situs.',
+          'Gabungkan hasil simulasi bunga majemuk ini dengan kalkulator inflasi agar Anda dapat melihat pertumbuhan daya beli riil dana investasi Anda di masa depan.',
         ],
       },
     ],
@@ -475,7 +475,7 @@ export const tools: ToolDefinition[] = [
         heading: 'Cocok untuk keputusan cepat',
         paragraphs: [
           'Banyak keputusan bisnis harus dibuat cepat. ROI calculator memberi pandangan awal yang mudah dipahami sebelum data yang lebih lengkap dianalisis lebih jauh. Ini membantu tim tetap gesit namun tetap rasional.',
-          'Arsitektur situs memungkinkan tool ini tumbuh bersama kebutuhan konten lain seperti cash flow forecast, margin, dan break even point agar insight yang diberikan semakin lengkap.',
+          'Untuk penilaian proyek yang lebih menyeluruh, padukan hasil ROI dengan analisis arus kas (cash flow forecast), margin keuntungan, dan break-even point agar risiko dan potensi imbal hasil sama-sama terukur.',
         ],
       },
     ],
@@ -553,7 +553,7 @@ export const tools: ToolDefinition[] = [
         heading: 'Membantu perencanaan pribadi',
         paragraphs: [
           'Keuangan pribadi menjadi lebih sehat ketika pemasukan bersih dipahami sejak awal. Tool ini memberi ruang untuk simulasi yang cepat sehingga Anda tidak hanya melihat angka besar di atas kertas, tetapi juga angka yang benar-benar tersedia untuk dipakai.',
-          'Situs ini dapat dikembangkan lebih lanjut ke arah kalkulator pajak atau simulasi kompensasi karyawan, namun struktur dasarnya tetap sama: data-driven, modular, dan mudah dipelihara.',
+          'Untuk perhitungan potongan pajak penghasilan yang lebih rinci berdasarkan status PTKP dan tarif progresif UU HPP, Anda juga dapat melengkapinya dengan Kalkulator PPh 21.',
         ],
       },
     ],
@@ -943,7 +943,7 @@ export const tools: ToolDefinition[] = [
         heading: 'Sangat relevan untuk alur invoice',
         paragraphs: [
           'Karena situs ini juga memiliki invoice generator, pembayaran jatuh tempo menjadi komponen penting untuk melengkapi alur kerja penagihan. Dengan tool ini, Anda dapat menjaga tanggal penagihan dan reminder tetap konsisten.',
-          'Internal linking dari tool ini ke invoice generator dan kontak membantu pengguna bergerak dari pembuatan invoice ke pengaturan jadwal penagihan secara lebih natural.',
+          'Catat hasil tanggal jatuh tempo ke kalender penagihan Anda dan kirimkan pengingat sopan beberapa hari sebelum jatuh tempo agar arus kas bisnis tetap lancar.',
         ],
       },
     ],
@@ -1099,7 +1099,7 @@ export const tools: ToolDefinition[] = [
         heading: 'Mendukung alur kerja invoice',
         paragraphs: [
           'Karena situs ini memiliki invoice generator dan kalkulator PPN, reverse VAT calculator menjadi pasangan yang sangat relevan. Anda bisa berpindah dari harga final ke harga dasar lalu ke penagihan tanpa perlu keluar dari situs.',
-          'Internal linking yang kuat membantu mesin pencari dan pengguna memahami hubungan antar halaman yang membahas pajak dan invoice.',
+          'Setelah memperoleh angka DPP dan nilai PPN yang tepat, Anda dapat langsung menyalinnya ke faktur pajak atau invoice resmi agar pembukuan penjualan dan pelaporan pajak selalu sinkron.',
         ],
       },
     ],
@@ -1344,7 +1344,7 @@ export const tools: ToolDefinition[] = [
       },
       {
         question: 'Apakah bisa untuk beberapa produk?',
-        answer: 'Versi dasar fokus pada satu item, tetapi konsepnya mudah diperluas untuk banyak SKU.',
+        answer: 'Untuk banyak SKU, hitung masing-masing produk utama (terutama produk fast-moving) secara terpisah karena kecepatan jual dan lead time tiap pemasok biasanya berbeda.',
       },
     ],
     relatedSlugs: ['unit-cost-calculator', 'working-capital-calculator', 'gross-margin-calculator'],

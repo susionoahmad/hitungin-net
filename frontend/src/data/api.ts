@@ -1,12 +1,11 @@
-const rawApiBaseUrl = import.meta.env.VITE_API_BASE_URL
-
-if (!rawApiBaseUrl) {
-  throw new Error('Missing VITE_API_BASE_URL')
-}
+const rawApiBaseUrl = import.meta.env.VITE_API_BASE_URL || ''
 
 const API_TOKEN_KEY = 'toolkeuangan_api_token'
 
 export function getApiBaseUrl() {
+  if (!rawApiBaseUrl) {
+    throw new Error('Missing VITE_API_BASE_URL')
+  }
   return rawApiBaseUrl.replace(/\/+$/, '')
 }
 

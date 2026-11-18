@@ -2,6 +2,15 @@
 import { onMounted, ref } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { useAuth } from '@/composables/useAuth'
+import { applySeo } from '@/utils/seo'
+import { siteBrand, siteUrl } from '@/utils/site'
+
+applySeo({
+  title: `Autentikasi | ${siteBrand}`,
+  description: 'Memproses autentikasi akun.',
+  canonical: `${siteUrl}/auth/callback`,
+  robots: 'noindex, nofollow',
+})
 
 const route = useRoute()
 const router = useRouter()

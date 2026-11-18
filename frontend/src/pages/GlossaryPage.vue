@@ -5,7 +5,7 @@ import Breadcrumbs from '@/components/common/Breadcrumbs.vue';
 import SectionHeading from '@/components/common/SectionHeading.vue';
 import { glossaryTerms, type GlossaryTerm } from '@/data/glossary';
 import { applySeo, createBreadcrumbSchema, createWebPageSchema } from '@/utils/seo';
-import { siteName, siteUrl } from '@/utils/site';
+import { siteBrand, siteUrl } from '@/utils/site';
 import { buildLocalePath, detectLocaleFromPath } from '@/utils/locale';
 
 const route = useRoute();
@@ -17,21 +17,19 @@ const selectedCategory = ref<'all' | 'pajak' | 'investasi' | 'bisnis' | 'kredit'
 // SEO and Meta Setup
 watchEffect(() => {
   const isEn = locale.value === 'en';
-  const title = isEn ? `Business & Financial Glossary | ${siteName}` : `Kamus Istilah Finansial & Bisnis | ${siteName}`;
+  const title = isEn ? `Business & Financial Glossary | ${siteBrand}` : `Kamus Istilah Finansial & Bisnis | ${siteBrand}`;
   const description = isEn
     ? 'A complete educational dictionary of financial, tax, investment, loan, and business terms in Indonesia with direct calculation tools.'
     : 'Kamus dan panduan lengkap istilah keuangan, pajak, investasi, kredit, dan bisnis di Indonesia yang dilengkapi kalkulator praktis.';
   const path = buildLocalePath('/glossary', locale.value);
-  
+  const homeUrl = isEn ? `${siteUrl}/en` : siteUrl;
+
   applySeo({
     title,
     description,
     canonical: `${siteUrl}${path}`,
-    alternates: [
-      { hreflang: 'id', href: `${siteUrl}${buildLocalePath('/glossary', 'id')}` },
-      { hreflang: 'en', href: `${siteUrl}${buildLocalePath('/glossary', 'en')}` },
-      { hreflang: 'x-default', href: `${siteUrl}/glossary` },
-    ],
+    lang: locale.value,
+    robots: isEn ? 'noindex, follow' : 'index, follow',
     schema: [
       createWebPageSchema({
         name: title,
@@ -39,7 +37,7 @@ watchEffect(() => {
         url: `${siteUrl}${path}`,
       }),
       createBreadcrumbSchema([
-        { name: isEn ? 'Home' : 'Beranda', url: `${siteUrl}/${locale.value}` },
+        { name: isEn ? 'Home' : 'Beranda', url: homeUrl },
         { name: isEn ? 'Glossary' : 'Kamus Finansial', url: `${siteUrl}${path}` },
       ]),
     ],

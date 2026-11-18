@@ -1,57 +1,69 @@
-﻿<script setup lang="ts">
-import { computed } from 'vue';
+<script setup lang="ts">
+import { computed, watchEffect } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 import Breadcrumbs from '@/components/common/Breadcrumbs.vue';
 import SectionHeading from '@/components/common/SectionHeading.vue';
-import { applySeo } from '@/utils/seo';
+import { tools } from '@/data/tools';
+import { guides } from '@/data/guides';
+import { applySeo, createBreadcrumbSchema, createWebPageSchema } from '@/utils/seo';
 import { buildLocalePath, detectLocaleFromPath } from '@/utils/locale';
-import { siteName, siteUrl } from '@/utils/site';
+import { siteBrand, siteUrl } from '@/utils/site';
 
 const route = useRoute();
 const locale = computed(() => detectLocaleFromPath(route.path));
 
-applySeo({
-  title: locale.value === 'en' ? `About | ${siteName}` : `Tentang | ${siteName}`,
-  description:
-    locale.value === 'en'
-      ? 'Learn about the mission, editorial standards, expertise, and regulatory references behind Tools Bisnis & Keuangan Indonesia.'
-      : 'Pelajari misi, standar editorial, keahlian, dan referensi regulasi di balik Tools Bisnis & Keuangan Indonesia.',
-  canonical: `${siteUrl}${buildLocalePath('/about', locale.value)}`,
-  alternates: [
-    { hreflang: 'id', href: `${siteUrl}${buildLocalePath('/about', 'id')}` },
-    { hreflang: 'en', href: `${siteUrl}${buildLocalePath('/about', 'en')}` },
-    { hreflang: 'x-default', href: `${siteUrl}/about` },
-  ],
+watchEffect(() => {
+  const isEn = locale.value === 'en';
+  const path = buildLocalePath('/about', locale.value);
+  const title = isEn ? `About ${siteBrand}` : `Tentang ${siteBrand} & Standar Editorial`;
+  const description = isEn
+    ? `Learn about the mission, calculation methodology, and Indonesian regulatory references behind ${siteBrand}.`
+    : `Pelajari misi, metodologi perhitungan, standar editorial, dan referensi regulasi Indonesia di balik platform ${siteBrand}.`;
+
+  applySeo({
+    title,
+    description,
+    canonical: `${siteUrl}${path}`,
+    lang: locale.value,
+    robots: isEn ? 'noindex, follow' : 'index, follow',
+    schema: [
+      createWebPageSchema({ name: title, description, url: `${siteUrl}${path}` }),
+      createBreadcrumbSchema([
+        { name: isEn ? 'Home' : 'Beranda', url: isEn ? `${siteUrl}/en` : siteUrl },
+        { name: isEn ? 'About' : 'Tentang Kami', url: `${siteUrl}${path}` },
+      ]),
+    ],
+  });
 });
 
 const expertisePillars = [
   {
     icon: '📋',
-    titleId: 'Formula Terverifikasi',
-    titleEn: 'Verified Formulas',
-    descId: 'Setiap rumus perhitungan didasarkan pada standar akuntansi nasional, regulasi perpajakan, dan referensi bisnis resmi.',
-    descEn: 'Every calculation formula is based on national accounting standards, tax regulations, and official business references.',
+    titleId: 'Formula Terbuka & Terverifikasi',
+    titleEn: 'Transparent Formulas',
+    descId: 'Setiap kalkulator menampilkan dasar rumus dan contoh perhitungan langkah demi langkah dalam Rupiah sehingga hasil dapat diverifikasi secara mandiri.',
+    descEn: 'Every calculator displays its underlying formula and worked Rupiah examples so outputs can be independently verified.',
   },
   {
     icon: '🏛️',
-    titleId: 'Referensi Regulasi',
-    titleEn: 'Regulatory References',
-    descId: 'Kalkulator pajak mengacu pada UU HPP (No.7/2021), PTKP terbaru PMK, dan ketentuan BPJS Ketenagakerjaan.',
-    descEn: 'Tax calculators reference UU HPP (No.7/2021), the latest PTKP PMK regulations, and BPJS Ketenagakerjaan provisions.',
+    titleId: 'Acuan Regulasi Perpajakan',
+    titleEn: 'Tax Regulation References',
+    descId: 'Simulasi PPN 11% dan PPh 21 mengacu pada UU Harmonisasi Peraturan Perpajakan (UU HPP No. 7 Tahun 2021) dan ketentuan PTKP Direktorat Jenderal Pajak.',
+    descEn: 'VAT 11% and PPh 21 simulations reference the Tax Harmonization Law (UU HPP No. 7/2021) and Directorate General of Taxes PTKP brackets.',
   },
   {
     icon: '🕌',
-    titleId: 'Standar Keuangan Syariah',
-    titleEn: 'Islamic Finance Standards',
-    descId: 'Kalkulator zakat mengikuti pedoman nisab dan haul dari BAZNAS (Badan Amil Zakat Nasional) Republik Indonesia.',
-    descEn: 'The zakat calculator follows nisab and haul guidelines from BAZNAS (National Zakat Board) of the Republic of Indonesia.',
+    titleId: 'Pedoman Zakat BAZNAS',
+    titleEn: 'BAZNAS Zakat Guidelines',
+    descId: 'Perhitungan zakat penghasilan dan zakat mal mengacu pada ketentuan nisab 85 gram emas dan tarif 2,5% sesuai pedoman BAZNAS.',
+    descEn: 'Income and wealth zakat calculations follow the 85-gram gold nisab benchmark and 2.5% rate set by BAZNAS.',
   },
   {
     icon: '⚖️',
     titleId: 'Ketenagakerjaan & HR',
-    titleEn: 'Labor & HR Compliance',
-    descId: 'Kalkulator pesangon dan THR mengacu langsung pada UU Cipta Kerja (No.11/2020) dan Permenaker terbaru yang berlaku.',
-    descEn: 'Severance pay and THR calculators directly reference the Job Creation Law (No.11/2020) and the latest Permenaker provisions.',
+    titleEn: 'Indonesian Labor Standards',
+    descId: 'Simulasi pesangon, UPMK, dan THR merujuk pada UU Cipta Kerja, PP No. 35 Tahun 2021, dan Permenaker No. 6 Tahun 2016.',
+    descEn: 'Severance, UPMK, and THR estimates reference the Job Creation Law, Government Regulation No. 35/2021, and Permenaker No. 6/2016.',
   },
 ];
 </script>
@@ -59,66 +71,39 @@ const expertisePillars = [
 <template>
   <section class="section-shell py-10">
     <Breadcrumbs />
-    <SectionHeading eyebrow="About">
-      {{ locale === 'en' ? 'About Business & Finance Tools Indonesia' : `Tentang ${siteName}` }}
+    <SectionHeading :eyebrow="locale === 'en' ? 'About Us' : 'Tentang Kami'">
+      {{ locale === 'en' ? `About ${siteBrand}` : `Tentang ${siteBrand}` }}
     </SectionHeading>
 
     <div class="grid gap-10 lg:grid-cols-[1fr_320px]">
       <div class="prose-like max-w-none">
-
-        <!-- Mission -->
         <p v-if="locale === 'en'">
-          <strong>{{ siteName }}</strong> is an online utility platform built to serve the practical calculation needs of
-          business owners, freelancers, HR professionals, and everyday users across Indonesia. Our mission is to provide
-          fast, accurate, and accessible financial tools — without requiring sign-ins or navigating a complex interface.
+          <strong>{{ siteBrand }}</strong> (kalkulatorin.com) is an independent Indonesian business, tax, and personal finance calculator platform created to help SME owners, freelancers, HR practitioners, and households run practical financial calculations quickly directly from their browser.
         </p>
         <p v-else>
-          <strong>{{ siteName }}</strong> adalah platform tools online yang dibangun untuk melayani kebutuhan perhitungan
-          praktis bagi pemilik bisnis, freelancer, profesional HR, dan pengguna umum di seluruh Indonesia. Misi kami
-          adalah menyediakan alat bantu keuangan yang cepat, akurat, dan mudah diakses — tanpa perlu login atau
-          mempelajari antarmuka yang rumit.
+          <strong>{{ siteBrand }}</strong> (kalkulatorin.com) adalah platform kalkulator bisnis, perpajakan, dan keuangan pribadi asal Indonesia yang dibangun untuk membantu pelaku UMKM, freelancer, praktisi HR, serta keluarga menjalankan perhitungan finansial sehari-hari secara cepat dan transparan langsung dari browser.
         </p>
 
-        <!-- Architecture -->
         <p v-if="locale === 'en'">
-          The site is built with a modular, data-driven architecture. Each calculator is defined as a self-contained unit
-          with its own metadata, bilingual SEO content, FAQ schema, and cross-links to related tools — making both human
-          navigation and search engine indexing highly efficient.
+          Beyond raw calculator outputs, we publish open mathematical formulas, worked Rupiah case studies, a financial glossary, and in-depth guides so visitors truly understand the numbers behind every business or personal finance decision.
         </p>
         <p v-else>
-          Situs ini dibangun dengan arsitektur modular berbasis data. Setiap kalkulator didefinisikan sebagai unit mandiri
-          dengan metadata sendiri, konten SEO dua bahasa, skema FAQ, dan tautan silang ke tool terkait — sehingga navigasi
-          pengguna maupun pengindeksan mesin pencari menjadi sangat efisien.
+          Kami percaya angka hasil kalkulator saja tidak cukup tanpa pemahaman konteks di baliknya. Karena itu, setiap kalkulator dilengkapi penjelasan rumus yang terbuka, simulasi kasus nyata dalam Rupiah, Kamus Finansial, serta artikel panduan praktis agar pengguna dapat mengambil keputusan yang lebih rasional.
         </p>
 
-        <!-- Editorial Standards -->
-        <h2>{{ locale === 'en' ? 'Editorial Standards' : 'Standar Editorial' }}</h2>
-        <p v-if="locale === 'en'">
-          All content on this site is created and reviewed according to the following editorial process:
-        </p>
-        <p v-else>
-          Seluruh konten di situs ini dibuat dan ditinjau berdasarkan proses editorial berikut:
-        </p>
+        <h2>{{ locale === 'en' ? 'Editorial & Formula Review Process' : 'Standar Editorial & Pemeliharaan Rumus' }}</h2>
         <ol>
-          <li v-if="locale === 'en'"><strong>Research:</strong> Formula and methodology sourced from official legislation, public accounting standards, or peer-reviewed references.</li>
-          <li v-else><strong>Riset:</strong> Formula dan metodologi bersumber dari perundang-undangan resmi, standar akuntansi publik, atau referensi terverifikasi.</li>
-          <li v-if="locale === 'en'"><strong>Validation:</strong> Calculations are cross-checked with official government rate tables (e.g. DJP tax brackets) and Indonesian accounting standards (SAK).</li>
-          <li v-else><strong>Validasi:</strong> Perhitungan dicocokkan silang dengan tabel tarif resmi pemerintah (misalnya bracket pajak DJP) dan standar akuntansi Indonesia (SAK).</li>
-          <li v-if="locale === 'en'"><strong>Update:</strong> When regulations change (e.g. new PPN rate, PTKP revision), tools are updated to reflect the current values within a reasonable timeframe.</li>
-          <li v-else><strong>Pembaruan:</strong> Saat regulasi berubah (misalnya tarif PPN baru, revisi PTKP), tools diperbarui untuk mencerminkan nilai terkini dalam waktu yang wajar.</li>
-          <li v-if="locale === 'en'"><strong>Disclosure:</strong> Where a tool is a simulation or estimation, this is clearly disclosed on the tool's page and in our Disclaimer.</li>
-          <li v-else><strong>Pengungkapan:</strong> Jika sebuah tool bersifat simulasi atau estimasi, hal ini diungkapkan dengan jelas di halaman tool tersebut dan dalam Disclaimer kami.</li>
+          <li v-if="locale === 'en'"><strong>Source Verification:</strong> Formulas are cross-checked against public Indonesian regulations (UU HPP, PP 35/2021, Permenaker, BAZNAS) and standard accounting principles.</li>
+          <li v-else><strong>Verifikasi Sumber:</strong> Rumus disusun dan dicocokkan terhadap peraturan resmi yang dipublikasikan pemerintah (UU HPP, PP 35/2021, Permenaker, BAZNAS) serta prinsip akuntansi keuangan standar.</li>
+          <li v-if="locale === 'en'"><strong>Worked Examples:</strong> Every calculator is tested with realistic Rupiah scenarios to ensure edge cases such as tax-inclusive pricing or progressive tax brackets behave accurately.</li>
+          <li v-else><strong>Uji Simulasi Kasus Nyata:</strong> Setiap kalkulator diuji dengan skenario angka Rupiah yang realistis untuk memastikan kasus khusus seperti harga inklusif pajak atau lapisan tarif progresif dihitung dengan benar.</li>
+          <li v-if="locale === 'en'"><strong>Periodic Updates:</strong> Whenever key rates or thresholds change, calculators and accompanying guides are reviewed and updated.</li>
+          <li v-else><strong>Pembaruan Berkala:</strong> Ketika terdapat perubahan tarif pajak, batas PTKP, atau ketentuan ketenagakerjaan, kalkulator dan panduan terkait ditinjau ulang dan diperbarui.</li>
+          <li v-if="locale === 'en'"><strong>Clear Simulation Disclosure:</strong> All outputs are explicitly disclosed as educational simulations, not legally binding financial or tax advice.</li>
+          <li v-else><strong>Transparansi Batasan:</strong> Seluruh hasil perhitungan dinyatakan secara jelas sebagai simulasi edukatif, bukan pengganti konsultasi resmi konsultan pajak, akuntan publik, atau penasihat hukum.</li>
         </ol>
 
-        <!-- Regulatory References -->
-        <h2>{{ locale === 'en' ? 'Regulatory & Expert References' : 'Referensi Regulasi & Keahlian' }}</h2>
-        <p v-if="locale === 'en'">
-          Our financial tools reference the following authoritative sources:
-        </p>
-        <p v-else>
-          Tools keuangan kami mengacu pada sumber-sumber otoritatif berikut:
-        </p>
-
+        <h2>{{ locale === 'en' ? 'Reference Pillars' : 'Landasan Referensi Kami' }}</h2>
         <div class="not-prose mt-4 grid gap-4 sm:grid-cols-2">
           <div
             v-for="pillar in expertisePillars"
@@ -139,82 +124,71 @@ const expertisePillars = [
           </div>
         </div>
 
-        <!-- AdSense Transparency -->
-        <h2>{{ locale === 'en' ? 'Advertising & Monetization' : 'Iklan & Monetisasi' }}</h2>
+        <h2>{{ locale === 'en' ? 'How We Keep This Platform Free' : 'Transparansi Layanan Gratis' }}</h2>
         <p v-if="locale === 'en'">
-          This site is supported by display advertising via <strong>Google AdSense</strong>. Advertisements are clearly
-          separated from content and do not influence the editorial accuracy of any tool or article. We are committed to
-          maintaining a clean, non-intrusive reading experience even when ads are shown.
+          To keep our calculators and guides accessible free of charge, this site may display advertising through Google AdSense. Advertising never influences the formulas, calculation accuracy, or editorial independence of our content.
         </p>
         <p v-else>
-          Situs ini didukung oleh iklan bergambar melalui <strong>Google AdSense</strong>. Iklan dipisahkan dengan jelas
-          dari konten dan tidak memengaruhi akurasi editorial tool maupun artikel manapun. Kami berkomitmen untuk menjaga
-          pengalaman membaca yang bersih dan tidak mengganggu meskipun iklan ditampilkan.
+          Agar seluruh kalkulator dan artikel panduan tetap dapat diakses secara gratis oleh masyarakat luas, operasional situs ini dapat didukung melalui penayangan iklan Google AdSense. Iklan tidak memengaruhi rumus, hasil perhitungan, maupun independensi editorial kami.
         </p>
 
-        <!-- Contact -->
-        <h2>{{ locale === 'en' ? 'Get in Touch' : 'Hubungi Kami' }}</h2>
+        <h2>{{ locale === 'en' ? 'Feedback & Corrections' : 'Masukan & Koreksi Rumus' }}</h2>
         <p v-if="locale === 'en'">
-          We welcome feedback about formula accuracy, new tool suggestions, or content corrections. Visit our
+          Spotted a calculation discrepancy or want to suggest a new Indonesian calculator? Reach out via our
           <RouterLink :to="buildLocalePath('/contact', locale)" class="text-brand-600 dark:text-brand-400">Contact page</RouterLink>
-          or explore the
-          <RouterLink :to="buildLocalePath('/glossary', locale)" class="text-brand-600 dark:text-brand-400">Financial Glossary</RouterLink>
-          for educational definitions behind the tools.
+          or email us directly at <a href="mailto:hello@kalkulatorin.com" class="text-brand-600 dark:text-brand-400">hello@kalkulatorin.com</a>.
         </p>
         <p v-else>
-          Kami menerima masukan tentang akurasi formula, saran tool baru, atau koreksi konten. Kunjungi
+          Menemukan ketidaksesuaian angka atau ingin mengusulkan kalkulator baru? Hubungi tim kami melalui
           <RouterLink :to="buildLocalePath('/contact', locale)" class="text-brand-600 dark:text-brand-400">halaman Kontak</RouterLink>
-          kami atau jelajahi
-          <RouterLink :to="buildLocalePath('/glossary', locale)" class="text-brand-600 dark:text-brand-400">Kamus Finansial</RouterLink>
-          untuk definisi edukatif di balik setiap tool.
+          atau kirim email langsung ke <a href="mailto:hello@kalkulatorin.com" class="text-brand-600 dark:text-brand-400">hello@kalkulatorin.com</a>.
         </p>
       </div>
 
-      <!-- Sidebar -->
       <aside class="space-y-6">
         <div class="glass-panel p-5">
-          <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">
-            {{ locale === 'en' ? 'Site Summary' : 'Ringkasan Situs' }}
+          <p class="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400">
+            {{ locale === 'en' ? 'Platform Overview' : 'Ringkasan Platform' }}
           </p>
           <dl class="mt-4 space-y-4 text-sm">
             <div>
-              <dt class="text-slate-500 dark:text-slate-400">{{ locale === 'en' ? 'Tools Available' : 'Jumlah Tools' }}</dt>
-              <dd class="font-bold text-slate-950 dark:text-white">50+ {{ locale === 'en' ? 'calculators' : 'kalkulator' }}</dd>
+              <dt class="text-slate-500 dark:text-slate-400">{{ locale === 'en' ? 'Calculators Available' : 'Jumlah Kalkulator' }}</dt>
+              <dd class="font-bold text-slate-950 dark:text-white">{{ tools.length }} {{ locale === 'en' ? 'free calculators' : 'kalkulator gratis' }}</dd>
             </div>
             <div>
-              <dt class="text-slate-500 dark:text-slate-400">{{ locale === 'en' ? 'Languages' : 'Bahasa' }}</dt>
-              <dd class="font-bold text-slate-950 dark:text-white">Bahasa Indonesia & English</dd>
+              <dt class="text-slate-500 dark:text-slate-400">{{ locale === 'en' ? 'Editorial Guides' : 'Panduan Mendalam' }}</dt>
+              <dd class="font-bold text-slate-950 dark:text-white">{{ guides.length }} {{ locale === 'en' ? 'practical guides' : 'artikel panduan' }}</dd>
             </div>
             <div>
-              <dt class="text-slate-500 dark:text-slate-400">{{ locale === 'en' ? 'Regulation Base' : 'Basis Regulasi' }}</dt>
-              <dd class="font-bold text-slate-950 dark:text-white">{{ locale === 'en' ? 'Indonesian law & standards' : 'Hukum & standar Indonesia' }}</dd>
+              <dt class="text-slate-500 dark:text-slate-400">{{ locale === 'en' ? 'Regulatory Focus' : 'Fokus Regulasi' }}</dt>
+              <dd class="font-bold text-slate-950 dark:text-white">{{ locale === 'en' ? 'Indonesian tax, labor & business rules' : 'Perpajakan, ketenagakerjaan & UMKM Indonesia' }}</dd>
             </div>
             <div>
-              <dt class="text-slate-500 dark:text-slate-400">{{ locale === 'en' ? 'Data Storage' : 'Penyimpanan Data' }}</dt>
-              <dd class="font-bold text-slate-950 dark:text-white">{{ locale === 'en' ? 'Browser-side only (no server storage by default)' : 'Sisi browser (tidak disimpan server secara default)' }}</dd>
+              <dt class="text-slate-500 dark:text-slate-400">{{ locale === 'en' ? 'Data Privacy' : 'Privasi Input' }}</dt>
+              <dd class="font-bold text-slate-950 dark:text-white">{{ locale === 'en' ? 'Processed locally in your browser' : 'Diproses lokal di browser Anda' }}</dd>
             </div>
           </dl>
         </div>
 
         <div class="glass-panel p-5">
-          <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">
+          <p class="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400">
             {{ locale === 'en' ? 'Useful Links' : 'Tautan Berguna' }}
           </p>
           <nav class="mt-4 space-y-3 text-sm">
-            <RouterLink :to="buildLocalePath('/tools', locale)" class="block text-brand-600 hover:text-brand-800 dark:text-brand-400 dark:hover:text-brand-300">
-              {{ locale === 'en' ? 'Browse All Tools' : 'Jelajahi Semua Tools' }}
+            <RouterLink :to="buildLocalePath('/tools', locale)" class="block text-brand-600 hover:underline dark:text-brand-400">
+              {{ locale === 'en' ? 'Browse All Calculators' : 'Jelajahi Semua Kalkulator' }}
             </RouterLink>
-            <RouterLink :to="buildLocalePath('/glossary', locale)" class="block text-brand-600 hover:text-brand-800 dark:text-brand-400 dark:hover:text-brand-300">
+            <RouterLink :to="buildLocalePath('/panduan', locale)" class="block text-brand-600 hover:underline dark:text-brand-400">
+              {{ locale === 'en' ? 'Finance Guides' : 'Panduan Keuangan' }}
+            </RouterLink>
+            <RouterLink :to="buildLocalePath('/glossary', locale)" class="block text-brand-600 hover:underline dark:text-brand-400">
               {{ locale === 'en' ? 'Financial Glossary' : 'Kamus Finansial' }}
             </RouterLink>
-            <RouterLink :to="buildLocalePath('/disclaimer', locale)" class="block text-brand-600 hover:text-brand-800 dark:text-brand-400 dark:hover:text-brand-300">
-              {{ locale === 'en' ? 'Disclaimer' : 'Disclaimer' }}
+            <RouterLink :to="buildLocalePath('/disclaimer', locale)" class="block text-brand-600 hover:underline dark:text-brand-400">
+              Disclaimer
             </RouterLink>
-            <RouterLink :to="buildLocalePath('/privacy-policy', locale)" class="block text-brand-600 hover:text-brand-800 dark:text-brand-400 dark:hover:text-brand-300">
+            <RouterLink :to="buildLocalePath('/privacy-policy', locale)" class="block text-brand-600 hover:underline dark:text-brand-400">
               {{ locale === 'en' ? 'Privacy Policy' : 'Kebijakan Privasi' }}
-            </RouterLink>
-            <RouterLink :to="buildLocalePath('/contact', locale)" class="block text-brand-600 hover:text-brand-800 dark:text-brand-400 dark:hover:text-brand-300">
-              {{ locale === 'en' ? 'Contact & Feedback' : 'Kontak & Masukan' }}
             </RouterLink>
           </nav>
         </div>

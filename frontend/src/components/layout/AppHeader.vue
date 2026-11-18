@@ -26,16 +26,17 @@ const currentLocale = computed(() => detectLocaleFromPath(route.path));
 const alternateLocale = computed(() => (currentLocale.value === 'id' ? 'en' : 'id'));
 const languageLink = computed(() => switchLocalePath(route.path, alternateLocale.value));
 const languageLabel = computed(() => localeDisplayName(alternateLocale.value));
-const brandEyebrow = computed(() => (currentLocale.value === 'en' ? 'Business Tools' : 'Tools Bisnis'));
+const brandEyebrow = computed(() => 'Kalkulatorin');
 const brandName = computed(() =>
-  currentLocale.value === 'en' ? 'Business & Finance Tools Indonesia' : 'Tools Bisnis & Keuangan Indonesia',
+  currentLocale.value === 'en' ? 'Business & Finance Calculators' : 'Kalkulator Bisnis & Keuangan',
 );
 
 const navItems = computed(() => [
   { label: t('home', currentLocale.value), to: buildLocalePath('/', currentLocale.value) },
   { label: t('allTools', currentLocale.value), to: buildLocalePath('/tools', currentLocale.value) },
+  { label: t('guides', currentLocale.value), to: buildLocalePath('/panduan', currentLocale.value) },
+  { label: t('glossary', currentLocale.value), to: buildLocalePath('/glossary', currentLocale.value) },
   { label: t('about', currentLocale.value), to: buildLocalePath('/about', currentLocale.value) },
-  { label: t('privacy', currentLocale.value), to: buildLocalePath('/privacy-policy', currentLocale.value) },
   ...(isAdmin() ? [{ label: 'Admin', to: '/admin' }] : []),
 ]);
 
@@ -59,7 +60,7 @@ function toggleThemeWithTracking() {
     <div class="section-shell flex items-center justify-between gap-4 py-4">
       <RouterLink :to="buildLocalePath('/', currentLocale)" class="flex items-center gap-3" @click="trackHeaderClick('Brand logo', buildLocalePath('/', currentLocale))">
         <div class="grid h-11 w-11 place-items-center rounded-2xl bg-brand-500/15 text-lg font-bold text-brand-700 dark:bg-brand-500/20 dark:text-brand-200">
-          TB
+          K
         </div>
         <div>
           <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-600 dark:text-brand-300">{{ brandEyebrow }}</p>
